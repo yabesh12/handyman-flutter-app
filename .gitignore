@@ -1,0 +1,34 @@
+# Large archive files
+*.rar
+*.zip
+*.7z
+
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+*.lock
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# macOS
+.DS_Store
+
+# Backend - exclude entire folder due to long path issues on Windows
+backend/
+
+# Keystore (sensitive)
+*.jks
+*.keystore
+
+# Images that might be temporary
+1.jpg
+issue.jpg
+nul

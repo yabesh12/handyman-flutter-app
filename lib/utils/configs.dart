@@ -1,37 +1,36 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:booking_system_flutter/app_config.dart';
 
-const APP_NAME = 'Metrovibe';
-const APP_NAME_TAG_LINE = 'Fashion - Lifestyle - Trend - Home Services';
+const APP_NAME = AppConfig.appName;
+const APP_NAME_TAG_LINE = AppConfig.appTagLine;
 var defaultPrimaryColor = Color(0xFF5F60B9);
 
 // Don't add slash at the end of the url
 
-// Production Server URL
-const DOMAIN_URL = "http://147.93.105.88:8090";
+// Backend Server URL - Configure in lib/app_config.dart
+const DOMAIN_URL = AppConfig.domainUrl;
 const BASE_URL = '$DOMAIN_URL/api/';
 
 const DEFAULT_LANGUAGE = 'en';
 
-/// You can change this to your Provider App package name
-/// This will be used in Registered As Partner in Sign In Screen where your users can redirect to the Play/App Store for Provider App
-/// You can specify in Admin Panel, These will be used if you don't specify in Admin Panel
-const PROVIDER_PACKAGE_NAME = 'com.iqonic.provider';
-const IOS_LINK_FOR_PARTNER = "https://apps.apple.com/in/app/handyman-provider-app/id1596025324";
+/// Provider App package name - Configure in lib/app_config.dart
+const PROVIDER_PACKAGE_NAME = AppConfig.providerPackageName;
+const IOS_LINK_FOR_PARTNER = AppConfig.iosProviderAppStoreLink;
 
-const IOS_LINK_FOR_USER = 'https://apps.apple.com/us/app/handyman-service-user/id1591427211';
+const IOS_LINK_FOR_USER = AppConfig.iosAppStoreLink;
 
 const DASHBOARD_AUTO_SLIDER_SECOND = 5;
 const OTP_TEXT_FIELD_LENGTH = 6;
 
-const TERMS_CONDITION_URL = 'https://iqonic.design/terms-of-use/';
-const PRIVACY_POLICY_URL = 'https://iqonic.design/privacy-policy/';
-const HELP_AND_SUPPORT_URL = 'https://iqonic.design/privacy-policy/';
-const REFUND_POLICY_URL = 'https://iqonic.design/licensing-terms-more/#refund-policy';
-const INQUIRY_SUPPORT_EMAIL = 'hello@iqonic.design';
+const TERMS_CONDITION_URL = AppConfig.termsConditionUrl;
+const PRIVACY_POLICY_URL = AppConfig.privacyPolicyUrl;
+const HELP_AND_SUPPORT_URL = AppConfig.helpSupportUrl;
+const REFUND_POLICY_URL = AppConfig.refundPolicyUrl;
+const INQUIRY_SUPPORT_EMAIL = AppConfig.supportEmail;
 
-/// You can add help line number here for contact. It's demo number
-const HELP_LINE_NUMBER = '+15265897485';
+/// Helpline number for contact
+const HELP_LINE_NUMBER = AppConfig.helplineNumber;
 
 //Airtel Money Payments
 ///It Supports ["UGX", "NGN", "TZS", "KES", "RWF", "ZMW", "CFA", "XOF", "XAF", "CDF", "USD", "XAF", "SCR", "MGA", "MWK"]
@@ -63,17 +62,17 @@ DateTime todayDate = DateTime(2022, 8, 24);
 
 Country defaultCountry() {
   return Country(
-    phoneCode: '91',
-    countryCode: 'IN',
-    e164Sc: 91,
+    phoneCode: AppConfig.defaultPhoneCode,
+    countryCode: AppConfig.defaultCountryCode,
+    e164Sc: int.tryParse(AppConfig.defaultPhoneCode) ?? 1,
     geographic: true,
     level: 1,
-    name: 'India',
+    name: AppConfig.defaultCountryName,
     example: '9123456789',
-    displayName: 'India (IN) [+91]',
-    displayNameNoCountryCode: 'India (IN)',
-    e164Key: '91-IN-0',
-    fullExampleWithPlusSign: '+919123456789',
+    displayName: '${AppConfig.defaultCountryName} (${AppConfig.defaultCountryCode}) [+${AppConfig.defaultPhoneCode}]',
+    displayNameNoCountryCode: '${AppConfig.defaultCountryName} (${AppConfig.defaultCountryCode})',
+    e164Key: '${AppConfig.defaultPhoneCode}-${AppConfig.defaultCountryCode}-0',
+    fullExampleWithPlusSign: '+${AppConfig.defaultPhoneCode}9123456789',
   );
 }
 

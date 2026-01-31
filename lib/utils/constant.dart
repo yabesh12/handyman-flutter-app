@@ -1,10 +1,11 @@
 import 'package:nb_utils/nb_utils.dart';
+import 'package:booking_system_flutter/app_config.dart';
 
-/// DO NOT CHANGE THIS PACKAGE NAME
-var appPackageName = isAndroid ? 'com.iqonic.servicebooking' : 'com.iqonic.user';
+/// Package name - Configure in lib/app_config.dart
+var appPackageName = isAndroid ? AppConfig.androidPackageName : AppConfig.iosBundleId;
 
 //region Common Configs
-const DEFAULT_FIREBASE_PASSWORD = '12345678';
+const DEFAULT_FIREBASE_PASSWORD = 'firebase_default_pass';
 const DECIMAL_POINT = 2;
 const PER_PAGE_ITEM = 20;
 const PER_PAGE_CATEGORY_ITEM = 50;
@@ -77,9 +78,9 @@ const LIVESTREAM_FIREBASE = "LIVESTREAM_FIREBASE";
 const LIVESTREAM_UPDATE_HELP_DESK_LIST = "LIVESTREAM_UPDATE_HELP_DESK_LIST";
 //endregion
 
-//region default USER login
-const DEFAULT_EMAIL = 'demo@user.com';
-const DEFAULT_PASS = '12345678';
+//region default USER login - Configure in lib/app_config.dart
+const DEFAULT_EMAIL = AppConfig.demoEmail;
+const DEFAULT_PASS = AppConfig.demoPassword;
 //endregion
 
 //region THEME MODE TYPE

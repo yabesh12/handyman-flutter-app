@@ -118,9 +118,9 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/metrovibe-logo.jpg"
-  adaptive_icon_background: "#1a365d"
-  adaptive_icon_foreground: "assets/metrovibe-logo.jpg"
+  image_path: "assets/app_logo.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/app_logo.png"
 
 flutter:
   uses-material-design: true

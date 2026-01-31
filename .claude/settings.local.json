@@ -42,7 +42,8 @@
       "Bash(cmd /c \"cd /d C:\\\\Users\\\\sympo\\\\Downloads\\\\handyman_user_flutter_v11.10.0 && flutter --version\")",
       "Bash(cmd /c \"where flutter\")",
       "Bash(git checkout:*)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nInitial commit: MetroVibe Flutter handyman service app\n\n- Flutter user app for handyman service platform\n- Android and iOS configurations included\n- Assets and lib source code\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   }
 }

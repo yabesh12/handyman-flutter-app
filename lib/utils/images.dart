@@ -1,4 +1,6 @@
-const appLogo = 'assets/metrovibe-logo.jpg';
+import 'package:booking_system_flutter/app_config.dart';
+
+const appLogo = AppConfig.appLogo;
 
 //region NewDashboard
 const grid = "assets/newDashboard/grid.png";
@@ -7,7 +9,7 @@ const ic_clock = 'assets/icons/ic_clock.png';
 const ic_close = 'assets/icons/ic_close.png';
 const ic_video = 'assets/icons/ic_video.png';
 const ic_hi = 'assets/icons/ic_hi.png';
-const imgAppLogo = 'assets/metrovibe-logo.jpg';
+const imgAppLogo = AppConfig.appLogo;
 
 //endregion
 

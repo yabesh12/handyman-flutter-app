@@ -2,7 +2,7 @@
 class Assets {
   Assets._();
 
-  static const String assetsIcAppLogo = 'assets/metrovibe-logo.jpg';
+  static const String assetsIcAppLogo = 'assets/app_logo.png';
   static const String assetsWaveIndicator = 'assets/wave_indicator.gif';
   static const String flagIcAr = 'assets/flag/ic_ar.png';
   static const String flagIcDe = 'assets/flag/ic_de.png';
@@ -124,7 +124,7 @@ class Assets {
   static const String lottieTyping = 'assets/lottie/typing.json';
   static const String lottieWaveIndicator = 'assets/lottie/wave_indicator.json';
   static const String newDashboardGrid = 'assets/newDashboard/grid.png';
-  static const String newDashboardImgAppLogo = 'assets/metrovibe-logo.jpg';
+  static const String newDashboardImgAppLogo = 'assets/app_logo.png';
   static const String newDashboardPeople = 'assets/newDashboard/people.png';
   static const String upiPaymentAmazonPay = 'assets/icons/upi_payment/Amazon_pay.png';
   static const String upiPaymentAxisPay = 'assets/icons/upi_payment/axis_pay.webp';

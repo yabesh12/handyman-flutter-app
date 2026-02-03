@@ -356,6 +356,7 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
                         showInDialog(
                           context,
                           barrierDismissible: false,
+                          backgroundColor: context.cardColor,
                           insetPadding: EdgeInsets.symmetric(horizontal: 10),
                           builder: (p0) {
                             return ConfirmBookingDialog(

@@ -7,6 +7,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../main.dart';
+import 'otp_verification_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   @override
@@ -32,20 +33,19 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      appStore.setLoading(true);
 
-      Map req = {
-        UserKeys.email: emailCont.text.validate(),
-      };
+      // Close the forgot password dialog first
+      finish(context);
 
-      forgotPassword(req).then((res) {
-        appStore.setLoading(false);
-        finish(context);
+      // Navigate to OTP verification screen for password reset
+      bool? result = await OtpVerificationScreen(
+        email: emailCont.text.validate(),
+        isPasswordReset: true,
+      ).launch(context);
 
-        toast(res.message.validate());
-      }).catchError((e) {
-        toast(e.toString(), print: true);
-      }).whenComplete(() => appStore.setLoading(false));
+      if (result == true) {
+        toast('Password changed successfully! Please login with your new password.');
+      }
     }
   }
 

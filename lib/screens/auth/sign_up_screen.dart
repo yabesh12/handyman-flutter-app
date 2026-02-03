@@ -19,6 +19,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'otp_verification_screen.dart';
+
 class SignUpScreen extends StatefulWidget {
   final String? phoneNumber;
   final String? countryCode;
@@ -207,11 +209,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
       registerResponse.userData!.password = passwordCont.text.trim();
 
       appStore.setLoading(false);
-      toast(registerResponse.message.validate());
       await appStore.setLoginType(tempRegisterData.loginType!);
 
-      /// Back to sign in screen
-      finish(context);
+      // Navigate to OTP verification screen
+      bool? verified = await OtpVerificationScreen(
+        email: tempRegisterData.email.validate(),
+        isPasswordReset: false,
+      ).launch(context);
+
+      if (verified == true) {
+        toast('Registration successful! Please login.');
+        finish(context);
+      }
     }).catchError((e) {
       appStore.setLoading(false);
       toast(e.toString());

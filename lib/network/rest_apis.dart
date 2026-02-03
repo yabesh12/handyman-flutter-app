@@ -244,6 +244,31 @@ Future<BaseResponseModel> forgotPassword(Map request) async {
   return BaseResponseModel.fromJson(await handleResponse(await buildHttpResponse('forgot-password', request: request, method: HttpMethodType.POST)));
 }
 
+// OTP Verification APIs
+Future<void> sendOtp({required String email, required String endpoint}) async {
+  Map<String, dynamic> request = {'email': email};
+  var response = await handleResponse(await buildHttpResponse(endpoint, request: request, method: HttpMethodType.POST));
+  if (response is Map && response['status'] == false) {
+    throw response['message'] ?? 'Failed to send OTP';
+  }
+}
+
+Future<void> verifyOtp({required String email, required String otp, required String endpoint}) async {
+  Map<String, dynamic> request = {'email': email, 'otp': otp};
+  var response = await handleResponse(await buildHttpResponse(endpoint, request: request, method: HttpMethodType.POST));
+  if (response is Map && response['status'] == false) {
+    throw response['message'] ?? 'OTP verification failed';
+  }
+}
+
+Future<void> resetPasswordWithOtp({required String email, required String otp, required String newPassword}) async {
+  Map<String, dynamic> request = {'email': email, 'otp': otp, 'new_password': newPassword};
+  var response = await handleResponse(await buildHttpResponse('verify-reset-otp', request: request, method: HttpMethodType.POST));
+  if (response is Map && response['status'] == false) {
+    throw response['message'] ?? 'Password reset failed';
+  }
+}
+
 Future<BaseResponseModel> deleteAccountCompletely() async {
   return BaseResponseModel.fromJson(await handleResponse(await buildHttpResponse('delete-user-account', request: {}, method: HttpMethodType.POST)));
 }

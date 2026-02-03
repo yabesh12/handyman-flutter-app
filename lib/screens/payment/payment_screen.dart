@@ -22,7 +22,7 @@ import '../../services/midtrans_service.dart';
 import '../../services/paypal_service.dart';
 import '../../services/paystack_service.dart';
 import '../../services/phone_pe/phone_pe_service.dart';
-import '../../services/razorpay_service_new.dart';
+// Razorpay removed - cash only mode
 import '../../services/sadad_services_new.dart';
 import '../../services/stripe_service_new.dart';
 import '../../utils/configs.dart';
@@ -95,22 +95,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
       );
 
       stripeServiceNew.stripePay().catchError((e) {
-        appStore.setLoading(false);
-        toast(e);
-      });
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_RAZOR) {
-      RazorPayServiceNew razorPayServiceNew = RazorPayServiceNew(
-        paymentSetting: currentPaymentMethod!,
-        totalAmount: totalAmount,
-        onComplete: (p0) {
-          savePay(
-            paymentMethod: PAYMENT_METHOD_RAZOR,
-            paymentStatus: widget.isForAdvancePayment ? SERVICE_PAYMENT_STATUS_ADVANCE_PAID : SERVICE_PAYMENT_STATUS_PAID,
-            txnId: p0['paymentId'],
-          );
-        },
-      );
-      razorPayServiceNew.razorPayCheckout().catchError((e) {
         appStore.setLoading(false);
         toast(e);
       });

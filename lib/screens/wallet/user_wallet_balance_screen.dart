@@ -20,7 +20,7 @@ import '../../services/midtrans_service.dart';
 import '../../services/paypal_service.dart';
 import '../../services/paystack_service.dart';
 import '../../services/phone_pe/phone_pe_service.dart';
-import '../../services/razorpay_service_new.dart';
+// Razorpay removed - cash only mode
 import '../../services/sadad_services_new.dart';
 import '../../services/stripe_service_new.dart';
 import '../../utils/app_configuration.dart';
@@ -77,21 +77,6 @@ class _UserWalletBalanceScreenState extends State<UserWalletBalanceScreen> {
       );
 
       stripeServiceNew.stripePay().catchError((e) {
-        appStore.setLoading(false);
-        toast(e);
-      });
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_RAZOR) {
-      RazorPayServiceNew razorPayServiceNew = RazorPayServiceNew(
-        paymentSetting: currentPaymentMethod!,
-        totalAmount: walletAmountCont.text.toDouble(),
-        onComplete: (p0) {
-          log(p0);
-          Map req = {"amount": walletAmountCont.text.toDouble(), "transaction_type": PAYMENT_METHOD_RAZOR, "transaction_id": p0['orderId']};
-
-          walletTopUpApi(request: req);
-        },
-      );
-      razorPayServiceNew.razorPayCheckout().catchError((e) {
         appStore.setLoading(false);
         toast(e);
       });

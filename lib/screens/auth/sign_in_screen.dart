@@ -54,12 +54,6 @@ class _SignInScreenState extends State<SignInScreen> {
       emailCont.text = getStringAsync(USER_EMAIL);
       passwordCont.text = getStringAsync(USER_PASSWORD);
     }
-
-    /// For Demo Purpose
-    if (await isIqonicProduct) {
-      emailCont.text = DEFAULT_EMAIL;
-      passwordCont.text = DEFAULT_PASS;
-    }
   }
 
   //region Methods
@@ -267,24 +261,6 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ],
         ),
-        TextButton(
-          onPressed: () {
-            if (isAndroid) {
-              if (getStringAsync(PROVIDER_PLAY_STORE_URL).isNotEmpty) {
-                launchUrl(Uri.parse(getStringAsync(PROVIDER_PLAY_STORE_URL)), mode: LaunchMode.externalApplication);
-              } else {
-                launchUrl(Uri.parse('${getSocialMediaLink(LinkProvider.PLAY_STORE)}$PROVIDER_PACKAGE_NAME'), mode: LaunchMode.externalApplication);
-              }
-            } else if (isIOS) {
-              if (getStringAsync(PROVIDER_APPSTORE_URL).isNotEmpty) {
-                commonLaunchUrl(getStringAsync(PROVIDER_APPSTORE_URL));
-              } else {
-                commonLaunchUrl(IOS_LINK_FOR_PARTNER);
-              }
-            }
-          },
-          child: Text(language.lblRegisterAsPartner, style: boldTextStyle(color: primaryColor)),
-        )
       ],
     );
   }

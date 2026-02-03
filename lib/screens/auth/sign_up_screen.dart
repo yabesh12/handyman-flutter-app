@@ -36,17 +36,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   Country selectedCountry = defaultCountry();
 
-  TextEditingController fNameCont = TextEditingController();
-  TextEditingController lNameCont = TextEditingController();
+  TextEditingController fullNameCont = TextEditingController();
   TextEditingController emailCont = TextEditingController();
-  TextEditingController userNameCont = TextEditingController();
   TextEditingController mobileCont = TextEditingController();
   TextEditingController passwordCont = TextEditingController();
 
-  FocusNode fNameFocus = FocusNode();
-  FocusNode lNameFocus = FocusNode();
+  FocusNode fullNameFocus = FocusNode();
   FocusNode emailFocus = FocusNode();
-  FocusNode userNameFocus = FocusNode();
   FocusNode mobileFocus = FocusNode();
   FocusNode passwordFocus = FocusNode();
 
@@ -64,11 +60,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void init() async {
     if (widget.phoneNumber != null) {
       selectedCountry = Country.parse(widget.countryCode.validate(value: selectedCountry.countryCode));
-
       mobileCont.text = widget.phoneNumber != null ? widget.phoneNumber.toString() : "";
       passwordCont.text = widget.phoneNumber != null ? widget.phoneNumber.toString() : "";
-      userNameCont.text = widget.phoneNumber != null ? widget.phoneNumber.toString() : "";
     }
+  }
+
+  // Helper to split full name into first and last name
+  Map<String, String> splitFullName(String fullName) {
+    List<String> parts = fullName.trim().split(' ');
+    if (parts.length >= 2) {
+      return {
+        'firstName': parts.first,
+        'lastName': parts.sublist(1).join(' '),
+      };
+    }
+    // If only one name provided, use it as both first and last name
+    return {
+      'firstName': fullName.trim(),
+      'lastName': fullName.trim(),
+    };
+  }
+
+  // Generate username from email
+  String generateUsername(String email) {
+    return email.split('@').first.replaceAll('.', '').toLowerCase();
   }
 
   @override
@@ -95,13 +110,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         formKey.currentState!.save();
         appStore.setLoading(true);
 
+        Map<String, String> nameParts = splitFullName(fullNameCont.text);
+
         UserData userResponse = UserData()
           ..username = widget.phoneNumber.validate().trim()
           ..loginType = LOGIN_TYPE_OTP
           ..contactNumber = buildMobileNumber()
           ..email = emailCont.text.trim()
-          ..firstName = fNameCont.text.trim()
-          ..lastName = lNameCont.text.trim()
+          ..firstName = nameParts['firstName']!
+          ..lastName = nameParts['lastName']!
           ..userType = USER_TYPE_USER
           ..uid = widget.uid.validate()
           ..password = widget.phoneNumber.validate().trim();
@@ -161,14 +178,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (isAcceptedTc) {
         appStore.setLoading(true);
 
+        Map<String, String> nameParts = splitFullName(fullNameCont.text);
+        String generatedUsername = generateUsername(emailCont.text);
+
         /// Create a temporary request to send
         UserData tempRegisterData = UserData()
           ..contactNumber = buildMobileNumber()
-          ..firstName = fNameCont.text.trim()
-          ..lastName = lNameCont.text.trim()
+          ..firstName = nameParts['firstName']!
+          ..lastName = nameParts['lastName']!
           ..loginType = LOGIN_TYPE_USER
           ..userType = USER_TYPE_USER
-          ..username = userNameCont.text.trim()
+          ..username = generatedUsername
           ..email = emailCont.text.trim()
           ..password = passwordCont.text.trim();
 
@@ -221,41 +241,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _buildFormWidget() {
-    setState(() {});
     return Column(
       children: [
         32.height,
+        // Full Name field
         AppTextField(
           textFieldType: TextFieldType.NAME,
-          controller: fNameCont,
-          focus: fNameFocus,
-          nextFocus: lNameFocus,
-          errorThisFieldRequired: language.requiredText,
-          decoration: inputDecoration(context, labelText: language.hintFirstNameTxt),
-          suffix: ic_profile2.iconImage(size: 10).paddingAll(14),
-        ),
-        16.height,
-        AppTextField(
-          textFieldType: TextFieldType.NAME,
-          controller: lNameCont,
-          focus: lNameFocus,
-          nextFocus: userNameFocus,
-          errorThisFieldRequired: language.requiredText,
-          decoration: inputDecoration(context, labelText: language.hintLastNameTxt),
-          suffix: ic_profile2.iconImage(size: 10).paddingAll(14),
-        ),
-        16.height,
-        AppTextField(
-          textFieldType: TextFieldType.USERNAME,
-          controller: userNameCont,
-          focus: userNameFocus,
+          controller: fullNameCont,
+          focus: fullNameFocus,
           nextFocus: emailFocus,
-          readOnly: widget.isOTPLogin.validate() ? widget.isOTPLogin : false,
           errorThisFieldRequired: language.requiredText,
-          decoration: inputDecoration(context, labelText: language.hintUserNameTxt),
+          decoration: inputDecoration(context, labelText: "Full Name"),
           suffix: ic_profile2.iconImage(size: 10).paddingAll(14),
         ),
         16.height,
+        // Email field
         AppTextField(
           textFieldType: TextFieldType.EMAIL_ENHANCED,
           controller: emailCont,
@@ -266,10 +266,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
           suffix: ic_message.iconImage(size: 10).paddingAll(14),
         ),
         16.height,
+        // Mobile number field (optional)
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Country code ...
+            // Country code
             Container(
               height: 48.0,
               decoration: BoxDecoration(
@@ -295,15 +296,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ).onTap(() => changeCountry()),
             10.width,
-            // Mobile number text field...
+            // Mobile number text field (optional - no validation required)
             AppTextField(
               textFieldType: isAndroid ? TextFieldType.PHONE : TextFieldType.NAME,
               controller: mobileCont,
               focus: mobileFocus,
-              errorThisFieldRequired: language.requiredText,
               nextFocus: passwordFocus,
               isValidationRequired: false,
-              decoration: inputDecoration(context, labelText: "${language.hintContactNumberTxt}").copyWith(
+              decoration: inputDecoration(context, labelText: "${language.hintContactNumberTxt} (Optional)").copyWith(
                 hintText: '${language.lblExample}: ${selectedCountry.example}',
                 hintStyle: secondaryTextStyle(),
               ),

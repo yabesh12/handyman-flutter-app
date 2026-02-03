@@ -2,7 +2,6 @@ import 'package:booking_system_flutter/component/image_border_component.dart';
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/screens/auth/sign_in_screen.dart';
 import 'package:booking_system_flutter/screens/category/category_screen.dart';
-import 'package:booking_system_flutter/screens/chat/chat_list_screen.dart';
 import 'package:booking_system_flutter/screens/dashboard/fragment/booking_fragment.dart';
 import 'package:booking_system_flutter/screens/dashboard/fragment/dashboard_fragment.dart';
 import 'package:booking_system_flutter/screens/dashboard/fragment/profile_fragment.dart';
@@ -61,6 +60,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     /// Handle Firebase Notification click and redirect to that Service & BookDetail screen
     LiveStream().on(LIVESTREAM_FIREBASE, (value) {
+      // Profile is now index 3 (was 4 before removing chat)
       if (value == 3) {
         currentIndex = 3;
         setState(() {});
@@ -158,7 +158,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             Observer(builder: (context) => appStore.isLoggedIn ? BookingFragment() : SignInScreen(isFromDashboard: true)),
             CategoryScreen(),
-            Observer(builder: (context) => appStore.isLoggedIn ? ChatListScreen() : SignInScreen(isFromDashboard: true)),
             ProfileFragment(),
           ][currentIndex],
         ),
@@ -190,11 +189,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   icon: ic_category.iconImage(color: appTextSecondaryColor),
                   selectedIcon: ic_category.iconImage(color: context.primaryColor),
                   label: language.category,
-                ),
-                NavigationDestination(
-                  icon: ic_chat.iconImage(color: appTextSecondaryColor),
-                  selectedIcon: ic_chat.iconImage(color: context.primaryColor),
-                  label: language.lblChat,
                 ),
                 Observer(builder: (context) {
                   return NavigationDestination(

@@ -1,9 +1,9 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
-const APP_NAME = 'Metrovibe';
-const APP_NAME_TAG_LINE = 'Fashion - Lifestyle - Trend - Home Services';
-var defaultPrimaryColor = Color(0xFF5F60B9);
+const APP_NAME = 'MetroVibe';
+const APP_NAME_TAG_LINE = 'Your Trusted Home Services Partner in Chennai';
+var defaultPrimaryColor = Color(0xFF1E88E5);
 
 // Don't add slash at the end of the url
 

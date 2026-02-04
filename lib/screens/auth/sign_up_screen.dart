@@ -4,6 +4,7 @@ import 'package:booking_system_flutter/component/selected_item_widget.dart';
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
 import 'package:booking_system_flutter/network/rest_apis.dart';
+import 'package:booking_system_flutter/screens/auth/email_otp_verification_screen.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/common.dart';
 import 'package:booking_system_flutter/utils/configs.dart';
@@ -36,19 +37,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   Country selectedCountry = defaultCountry();
 
-  TextEditingController fNameCont = TextEditingController();
-  TextEditingController lNameCont = TextEditingController();
+  // AC Chill - Simplified registration with full name
+  TextEditingController fullNameCont = TextEditingController();
   TextEditingController emailCont = TextEditingController();
-  TextEditingController userNameCont = TextEditingController();
   TextEditingController mobileCont = TextEditingController();
   TextEditingController passwordCont = TextEditingController();
+  TextEditingController addressCont = TextEditingController();
 
-  FocusNode fNameFocus = FocusNode();
-  FocusNode lNameFocus = FocusNode();
+  FocusNode fullNameFocus = FocusNode();
   FocusNode emailFocus = FocusNode();
-  FocusNode userNameFocus = FocusNode();
   FocusNode mobileFocus = FocusNode();
   FocusNode passwordFocus = FocusNode();
+  FocusNode addressFocus = FocusNode();
 
   bool isAcceptedTc = false;
 
@@ -161,16 +161,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (isAcceptedTc) {
         appStore.setLoading(true);
 
+        // AC Chill - Split full name into first and last name
+        String fullName = fullNameCont.text.trim();
+        String firstName = fullName.split(' ').first;
+        String lastName = fullName.split(' ').length > 1
+            ? fullName.split(' ').skip(1).join(' ')
+            : '';
+
+        // Generate username from email
+        String username = emailCont.text.trim().split('@').first.replaceAll('.', '').toLowerCase();
+
         /// Create a temporary request to send
         UserData tempRegisterData = UserData()
           ..contactNumber = buildMobileNumber()
-          ..firstName = fNameCont.text.trim()
-          ..lastName = lNameCont.text.trim()
+          ..firstName = firstName
+          ..lastName = lastName
           ..loginType = LOGIN_TYPE_USER
           ..userType = USER_TYPE_USER
-          ..username = userNameCont.text.trim()
+          ..username = username
           ..email = emailCont.text.trim()
-          ..password = passwordCont.text.trim();
+          ..password = passwordCont.text.trim()
+          ..address = addressCont.text.trim();
 
         createUsers(tempRegisterData: tempRegisterData);
       } else {
@@ -190,8 +201,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
       toast(registerResponse.message.validate());
       await appStore.setLoginType(tempRegisterData.loginType!);
 
-      /// Back to sign in screen
-      finish(context);
+      // AC Chill - Navigate to OTP verification screen
+      bool? verified = await EmailOTPVerificationScreen(
+        email: emailCont.text.trim(),
+        isFromForgotPassword: false,
+      ).launch(context);
+
+      if (verified == true) {
+        /// Back to sign in screen after email verification
+        finish(context);
+      }
     }).catchError((e) {
       appStore.setLoading(false);
       toast(e.toString());
@@ -225,47 +244,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Column(
       children: [
         32.height,
+        // AC Chill - Full Name field (required)
         AppTextField(
           textFieldType: TextFieldType.NAME,
-          controller: fNameCont,
-          focus: fNameFocus,
-          nextFocus: lNameFocus,
-          errorThisFieldRequired: language.requiredText,
-          decoration: inputDecoration(context, labelText: language.hintFirstNameTxt),
-          suffix: ic_profile2.iconImage(size: 10).paddingAll(14),
-        ),
-        16.height,
-        AppTextField(
-          textFieldType: TextFieldType.NAME,
-          controller: lNameCont,
-          focus: lNameFocus,
-          nextFocus: userNameFocus,
-          errorThisFieldRequired: language.requiredText,
-          decoration: inputDecoration(context, labelText: language.hintLastNameTxt),
-          suffix: ic_profile2.iconImage(size: 10).paddingAll(14),
-        ),
-        16.height,
-        AppTextField(
-          textFieldType: TextFieldType.USERNAME,
-          controller: userNameCont,
-          focus: userNameFocus,
+          controller: fullNameCont,
+          focus: fullNameFocus,
           nextFocus: emailFocus,
-          readOnly: widget.isOTPLogin.validate() ? widget.isOTPLogin : false,
           errorThisFieldRequired: language.requiredText,
-          decoration: inputDecoration(context, labelText: language.hintUserNameTxt),
+          decoration: inputDecoration(context, labelText: language.fullName),
           suffix: ic_profile2.iconImage(size: 10).paddingAll(14),
         ),
         16.height,
+        // Email field (required)
         AppTextField(
           textFieldType: TextFieldType.EMAIL_ENHANCED,
           controller: emailCont,
           focus: emailFocus,
           errorThisFieldRequired: language.requiredText,
-          nextFocus: mobileFocus,
+          nextFocus: passwordFocus,
           decoration: inputDecoration(context, labelText: language.hintEmailTxt),
           suffix: ic_message.iconImage(size: 10).paddingAll(14),
         ),
         16.height,
+        // Password field (required)
+        if (!widget.isOTPLogin)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppTextField(
+                textFieldType: TextFieldType.PASSWORD,
+                controller: passwordCont,
+                focus: passwordFocus,
+                nextFocus: mobileFocus,
+                obscureText: true,
+                readOnly: widget.isOTPLogin.validate() ? widget.isOTPLogin : false,
+                suffixPasswordVisibleWidget: ic_show.iconImage(size: 10).paddingAll(14),
+                suffixPasswordInvisibleWidget: ic_hide.iconImage(size: 10).paddingAll(14),
+                errorThisFieldRequired: language.requiredText,
+                decoration: inputDecoration(context, labelText: language.hintPasswordTxt),
+              ),
+              16.height,
+            ],
+          ),
+        // Mobile Number field (optional)
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -301,9 +322,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               controller: mobileCont,
               focus: mobileFocus,
               errorThisFieldRequired: language.requiredText,
-              nextFocus: passwordFocus,
+              nextFocus: addressFocus,
               isValidationRequired: false,
-              decoration: inputDecoration(context, labelText: "${language.hintContactNumberTxt}").copyWith(
+              decoration: inputDecoration(context, labelText: "${language.hintContactNumberTxt} (${language.notAvailable.toLowerCase()})").copyWith(
                 hintText: '${language.lblExample}: ${selectedCountry.example}',
                 hintStyle: secondaryTextStyle(),
               ),
@@ -312,33 +333,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ).expand(),
           ],
         ),
-        8.height,
-        if (!widget.isOTPLogin)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              4.height,
-              AppTextField(
-                textFieldType: TextFieldType.PASSWORD,
-                controller: passwordCont,
-                focus: passwordFocus,
-                obscureText: true,
-                readOnly: widget.isOTPLogin.validate() ? widget.isOTPLogin : false,
-                suffixPasswordVisibleWidget: ic_show.iconImage(size: 10).paddingAll(14),
-                suffixPasswordInvisibleWidget: ic_hide.iconImage(size: 10).paddingAll(14),
-                errorThisFieldRequired: language.requiredText,
-                decoration: inputDecoration(context, labelText: language.hintPasswordTxt),
-                onFieldSubmitted: (s) {
-                  // if (widget.isOTPLogin) {
-                  //   registerWithOTP();
-                  // } else {
-                  //   registerUser();
-                  // }
-                },
-              ),
-              20.height,
-            ],
-          ),
+        16.height,
+        // Address field (optional)
+        AppTextField(
+          textFieldType: TextFieldType.MULTILINE,
+          controller: addressCont,
+          focus: addressFocus,
+          isValidationRequired: false,
+          maxLines: 2,
+          minLines: 2,
+          decoration: inputDecoration(context, labelText: "${language.hintAddress} (${language.notAvailable.toLowerCase()})"),
+        ),
+        16.height,
         _buildTcAcceptWidget(),
         8.height,
         AppButton(

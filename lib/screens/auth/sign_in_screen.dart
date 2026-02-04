@@ -461,7 +461,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     _buildRememberWidget(),
-                    if (!getBoolAsync(HAS_IN_REVIEW)) _buildSocialWidget(),
+                    // AC Chill - Social login removed
                     30.height,
                   ],
                 );

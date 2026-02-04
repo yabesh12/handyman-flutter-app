@@ -1,5 +1,5 @@
 /// ============================================================
-/// APP CONFIGURATION FILE - CUSTOMIZE YOUR APP HERE
+/// AC CHILL - APP CONFIGURATION FILE
 /// ============================================================
 /// This file contains all configurable values for your app.
 /// Update these values before building your app.
@@ -13,10 +13,10 @@ class AppConfig {
   // ============================================================
 
   /// Your app name (displayed in the app)
-  static const String appName = 'YOUR_APP_NAME';
+  static const String appName = 'AC Chill';
 
   /// App tagline (displayed on splash/home screen)
-  static const String appTagLine = 'Your App Tagline Here';
+  static const String appTagLine = 'Cool Comfort at Your Doorstep';
 
   /// App logo path (place your logo in assets folder)
   static const String appLogo = 'assets/app_logo.png';
@@ -29,7 +29,7 @@ class AppConfig {
   /// For local development: http://10.0.2.2:8000 (Android emulator)
   /// For local development: http://localhost:8000 (iOS simulator)
   /// For physical device: http://YOUR_PC_IP:8000
-  static const String domainUrl = 'http://localhost:8000';
+  static const String domainUrl = 'https://acchill.com';
 
   /// API base URL (usually domainUrl + /api/)
   static const String baseUrl = '$domainUrl/api/';
@@ -39,13 +39,13 @@ class AppConfig {
   // ============================================================
 
   /// Android package name (must match build.gradle)
-  static const String androidPackageName = 'com.yourcompany.yourapp';
+  static const String androidPackageName = 'com.acchill.app';
 
   /// iOS bundle ID (must match Xcode project)
-  static const String iosBundleId = 'com.yourcompany.yourapp';
+  static const String iosBundleId = 'com.acchill.app';
 
   /// Provider app package name (for "Become a Provider" feature)
-  static const String providerPackageName = 'com.yourcompany.yourapp.provider';
+  static const String providerPackageName = 'com.acchill.provider';
 
   // ============================================================
   // APP STORE LINKS (update after publishing)
@@ -62,19 +62,19 @@ class AppConfig {
   // ============================================================
 
   /// Terms & Conditions URL
-  static const String termsConditionUrl = 'https://yourwebsite.com/terms';
+  static const String termsConditionUrl = 'https://acchill.com/terms';
 
   /// Privacy Policy URL
-  static const String privacyPolicyUrl = 'https://yourwebsite.com/privacy';
+  static const String privacyPolicyUrl = 'https://acchill.com/privacy';
 
   /// Help & Support URL
-  static const String helpSupportUrl = 'https://yourwebsite.com/support';
+  static const String helpSupportUrl = 'https://acchill.com/support';
 
   /// Refund Policy URL
-  static const String refundPolicyUrl = 'https://yourwebsite.com/refund';
+  static const String refundPolicyUrl = 'https://acchill.com/refund';
 
   /// Support email address
-  static const String supportEmail = 'support@yourcompany.com';
+  static const String supportEmail = 'support@acchill.com';
 
   /// Helpline phone number
   static const String helplineNumber = '+1234567890';

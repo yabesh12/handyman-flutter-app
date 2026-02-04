@@ -63,7 +63,8 @@ BaseLanguage language = LanguageEn();
 //region Services
 UserService userService = UserService();
 AuthService authService = AuthService();
-ChatServices chatServices = ChatServices();
+// AC Chill - Chat services removed
+// ChatServices chatServices = ChatServices();
 RemoteConfigDataModel remoteConfigDataModel = RemoteConfigDataModel();
 //endregion
 

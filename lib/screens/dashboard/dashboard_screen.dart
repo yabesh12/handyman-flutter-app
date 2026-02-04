@@ -1,8 +1,6 @@
 import 'package:booking_system_flutter/component/image_border_component.dart';
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/screens/auth/sign_in_screen.dart';
-import 'package:booking_system_flutter/screens/category/category_screen.dart';
-import 'package:booking_system_flutter/screens/chat/chat_list_screen.dart';
 import 'package:booking_system_flutter/screens/dashboard/fragment/booking_fragment.dart';
 import 'package:booking_system_flutter/screens/dashboard/fragment/dashboard_fragment.dart';
 import 'package:booking_system_flutter/screens/dashboard/fragment/profile_fragment.dart';
@@ -25,6 +23,8 @@ import '../newDashboard/dashboard_1/dashboard_fragment_1.dart';
 import '../newDashboard/dashboard_2/dashboard_fragment_2.dart';
 import '../newDashboard/dashboard_3/dashboard_fragment_3.dart';
 import '../newDashboard/dashboard_4/dashboard_fragment_4.dart';
+
+// AC Chill - Category and Chat screens removed from navigation
 
 class DashboardScreen extends StatefulWidget {
   final bool? redirectToBooking;
@@ -140,6 +140,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         body: AnimatedOpacity(
           opacity: 1,
           duration: Duration(milliseconds: 500),
+          // AC Chill - Simplified navigation: Home, Bookings, Profile (3 tabs)
           child: [
             Observer(
               builder: (context) {
@@ -157,8 +158,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
               }
             ),
             Observer(builder: (context) => appStore.isLoggedIn ? BookingFragment() : SignInScreen(isFromDashboard: true)),
-            CategoryScreen(),
-            Observer(builder: (context) => appStore.isLoggedIn ? ChatListScreen() : SignInScreen(isFromDashboard: true)),
             ProfileFragment(),
           ][currentIndex],
         ),
@@ -173,6 +172,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               surfaceTintColor: Colors.transparent,
               shadowColor: Colors.transparent,
             ),
+            // AC Chill - 3 tabs only: Home, Bookings, Profile
             child: NavigationBar(
               selectedIndex: currentIndex,
               destinations: [
@@ -185,16 +185,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   icon: ic_ticket.iconImage(color: appTextSecondaryColor),
                   selectedIcon: ic_ticket.iconImage(color: context.primaryColor),
                   label: language.booking,
-                ),
-                NavigationDestination(
-                  icon: ic_category.iconImage(color: appTextSecondaryColor),
-                  selectedIcon: ic_category.iconImage(color: context.primaryColor),
-                  label: language.category,
-                ),
-                NavigationDestination(
-                  icon: ic_chat.iconImage(color: appTextSecondaryColor),
-                  selectedIcon: ic_chat.iconImage(color: context.primaryColor),
-                  label: language.lblChat,
                 ),
                 Observer(builder: (context) {
                   return NavigationDestination(

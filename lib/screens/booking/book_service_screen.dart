@@ -16,7 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../../component/wallet_balance_component.dart';
+// AC Chill - Wallet balance component removed
+// import '../../../component/wallet_balance_component.dart';
 import '../../../model/booking_amount_model.dart';
 import '../../../utils/booking_calculations_logic.dart';
 import '../../app_theme.dart';
@@ -323,12 +324,10 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
 
               priceWidget(),
 
+              // AC Chill - Wallet balance component removed
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Observer(builder: (context) {
-                    return WalletBalanceComponent().visible(appConfigurationStore.isEnableUserWallet && widget.data.serviceDetail!.isFixedService);
-                  }),
                   16.height,
                   Text(language.disclaimer, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                   Text(language.disclaimerContent, style: secondaryTextStyle()),

@@ -49,6 +49,7 @@ dependencies:
 
   # OTHER
   country_picker: ^2.0.26
+  pin_code_fields: ^8.0.1  # AC Chill - OTP input field
   flutter_custom_tabs: ^2.1.0
   permission_handler: ^11.3.1
   flutter_html: ^3.0.0-beta.2

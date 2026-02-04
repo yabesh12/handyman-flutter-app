@@ -1,4 +1,6 @@
 import 'package:booking_system_flutter/network/rest_apis.dart';
+import 'package:booking_system_flutter/screens/auth/email_otp_verification_screen.dart';
+import 'package:booking_system_flutter/screens/auth/reset_password_screen.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/common.dart';
 import 'package:booking_system_flutter/utils/model_keys.dart';
@@ -27,6 +29,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     //
   }
 
+  // AC Chill - 3-Step Forgot Password Flow
   Future<void> forgotPwd() async {
     hideKeyboard(context);
 
@@ -38,11 +41,27 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         UserKeys.email: emailCont.text.validate(),
       };
 
-      forgotPassword(req).then((res) {
+      forgotPassword(req).then((res) async {
         appStore.setLoading(false);
-        finish(context);
-
         toast(res.message.validate());
+
+        // Step 2: Navigate to OTP verification
+        bool? otpVerified = await EmailOTPVerificationScreen(
+          email: emailCont.text.trim(),
+          isFromForgotPassword: true,
+        ).launch(context);
+
+        if (otpVerified == true) {
+          // Step 3: Navigate to reset password screen
+          bool? passwordReset = await ResetPasswordScreen(
+            email: emailCont.text.trim(),
+          ).launch(context);
+
+          if (passwordReset == true) {
+            // Close the forgot password dialog
+            finish(context);
+          }
+        }
       }).catchError((e) {
         toast(e.toString(), print: true);
       }).whenComplete(() => appStore.setLoading(false));
@@ -103,7 +122,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ),
                 16.height,
                 AppButton(
-                  text: language.resetPassword,
+                  text: language.btnSendOtp,
                   color: primaryColor,
                   textColor: Colors.white,
                   width: context.width() - context.navigationBarHeight,

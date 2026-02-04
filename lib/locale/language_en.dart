@@ -2,14 +2,15 @@ import 'package:booking_system_flutter/locale/languages.dart';
 import 'package:booking_system_flutter/utils/configs.dart';
 
 class LanguageEn extends BaseLanguage {
+  // AC Chill - Updated walkthrough titles
   @override
-  String get walkTitle1 => 'Create and Set Up Your Account';
+  String get walkTitle1 => 'Book AC Services Easily';
 
   @override
-  String get walkTitle2 => 'Browse and Book Services';
+  String get walkTitle2 => 'Expert AC Technicians';
 
   @override
-  String get walkTitle3 => 'Track and Manage Your Bookings';
+  String get walkTitle3 => 'Convenient Scheduling';
 
   @override
   String get getStarted => 'Get Started';
@@ -236,14 +237,15 @@ class LanguageEn extends BaseLanguage {
   @override
   String get btnSubmit => "Submit";
 
+  // AC Chill - Updated walkthrough descriptions
   @override
-  String get walkThrough1 => 'Sign up or log in to your account using your email or social media profiles. Completing your profile ensures a seamless booking experience.';
+  String get walkThrough1 => 'Browse our AC services including installation, repair, maintenance, gas refill, and deep cleaning. Book with just a few taps.';
 
   @override
-  String get walkThrough2 => 'Explore a wide range of services available in your area. Select a service, choose a convenient time slot, and provide your location details to book a service quickly and easily.';
+  String get walkThrough2 => 'Our certified AC technicians are trained professionals who deliver quality service. Get expert help for all your AC needs.';
 
   @override
-  String get walkThrough3 => 'Keep track of your service status in real-time. View and manage your current and past bookings. Reschedule or cancel upcoming services effortlessly.';
+  String get walkThrough3 => 'Choose a date and time that works for you. Our technicians will arrive at your doorstep ready to provide cool comfort.';
 
   @override
   String get lblNotification => "Notifications";
@@ -2062,4 +2064,50 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get chooseYourDateRange => 'Choose your Date Range';
+
+  // AC Chill - Email OTP Authentication
+  @override
+  String get verifyResetOTP => 'Verify Reset OTP';
+
+  @override
+  String get enterOTPSentTo => 'Enter the 6-digit OTP sent to';
+
+  @override
+  String get verify => 'Verify';
+
+  @override
+  String get didNotReceiveOTP => "Didn't receive OTP?";
+
+  @override
+  String get resendOTP => 'Resend OTP';
+
+  @override
+  String get resendIn => 'Resend in';
+
+  @override
+  String get otpVerifiedSuccessfully => 'OTP verified successfully';
+
+  @override
+  String get emailVerifiedSuccessfully => 'Email verified successfully. You can now sign in.';
+
+  @override
+  String get otpSentSuccessfully => 'OTP sent successfully';
+
+  @override
+  String get enterNewPassword => 'Enter your new password below';
+
+  @override
+  String get newPassword => 'New Password';
+
+  @override
+  String get confirmNewPassword => 'Confirm New Password';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get passwordResetSuccessfully => 'Password reset successfully. You can now sign in with your new password.';
+
+  @override
+  String get fullName => 'Full Name';
 }

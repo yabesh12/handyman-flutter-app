@@ -1376,4 +1376,21 @@ abstract class BaseLanguage {
   String get to;
 
   String get chooseYourDateRange;
+
+  // AC Chill - Email OTP Authentication
+  String get verifyResetOTP;
+  String get enterOTPSentTo;
+  String get verify;
+  String get didNotReceiveOTP;
+  String get resendOTP;
+  String get resendIn;
+  String get otpVerifiedSuccessfully;
+  String get emailVerifiedSuccessfully;
+  String get otpSentSuccessfully;
+  String get enterNewPassword;
+  String get newPassword;
+  String get confirmNewPassword;
+  String get passwordsDoNotMatch;
+  String get passwordResetSuccessfully;
+  String get fullName;
 }

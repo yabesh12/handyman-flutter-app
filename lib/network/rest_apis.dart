@@ -244,6 +244,23 @@ Future<BaseResponseModel> forgotPassword(Map request) async {
   return BaseResponseModel.fromJson(await handleResponse(await buildHttpResponse('forgot-password', request: request, method: HttpMethodType.POST)));
 }
 
+// AC Chill - Email OTP Authentication APIs
+Future<BaseResponseModel> verifyEmailOTP(Map request) async {
+  return BaseResponseModel.fromJson(await handleResponse(await buildHttpResponse('verify-email-otp', request: request, method: HttpMethodType.POST)));
+}
+
+Future<BaseResponseModel> resendEmailOTP(Map request) async {
+  return BaseResponseModel.fromJson(await handleResponse(await buildHttpResponse('resend-email-otp', request: request, method: HttpMethodType.POST)));
+}
+
+Future<BaseResponseModel> verifyResetOTP(Map request) async {
+  return BaseResponseModel.fromJson(await handleResponse(await buildHttpResponse('verify-reset-otp', request: request, method: HttpMethodType.POST)));
+}
+
+Future<BaseResponseModel> resetPasswordWithOTP(Map request) async {
+  return BaseResponseModel.fromJson(await handleResponse(await buildHttpResponse('reset-password', request: request, method: HttpMethodType.POST)));
+}
+
 Future<BaseResponseModel> deleteAccountCompletely() async {
   return BaseResponseModel.fromJson(await handleResponse(await buildHttpResponse('delete-user-account', request: {}, method: HttpMethodType.POST)));
 }

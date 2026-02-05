@@ -32,13 +32,13 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> init() async {
     await appStore.setLanguage(getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: DEFAULT_LANGUAGE));
 
-    // Demo mode - Set default configuration
+    // Set default configuration
     await appConfigurationStore.setUserDashboardType(DASHBOARD_1);
-    await appConfigurationStore.setCurrencySymbol('\$');
-    await appConfigurationStore.setCurrencyCode('USD');
+    await appConfigurationStore.setCurrencySymbol('₹');
+    await appConfigurationStore.setCurrencyCode('INR');
     await appConfigurationStore.setCurrencyPosition(CURRENCY_POSITION_LEFT);
 
-    ///Set app configurations - Skip if no backend configured
+    /// Load app configurations from backend
     try {
       await getAppConfigurations().then((value) {}).catchError((e) async {
         if (!await isNetworkAvailable()) {
@@ -49,6 +49,11 @@ class _SplashScreenState extends State<SplashScreen> {
     } catch (e) {
       log('Backend not configured, running in static mode');
     }
+
+    // AC Chill - Force INR currency (override backend settings until admin panel is updated)
+    await appConfigurationStore.setCurrencySymbol('₹');
+    await appConfigurationStore.setCurrencyCode('INR');
+    await appConfigurationStore.setCurrencyPosition(CURRENCY_POSITION_LEFT);
 
     appStore.setLoading(false);
 

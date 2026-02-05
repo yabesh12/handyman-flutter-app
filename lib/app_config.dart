@@ -83,9 +83,9 @@ class AppConfig {
   // DEFAULT COUNTRY (for phone number input)
   // ============================================================
 
-  static const String defaultCountryCode = 'US';
-  static const String defaultPhoneCode = '1';
-  static const String defaultCountryName = 'United States';
+  static const String defaultCountryCode = 'IN';
+  static const String defaultPhoneCode = '91';
+  static const String defaultCountryName = 'India';
 
   // ============================================================
   // DEMO CREDENTIALS (remove in production)

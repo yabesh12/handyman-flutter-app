@@ -174,17 +174,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ? fullName.split(' ').skip(1).join(' ')
             : '';
 
-        // Generate username from email
-        String username = emailCont.text.trim().split('@').first.replaceAll('.', '').toLowerCase();
-
         /// Create a temporary request to send
+        /// AC Chill - Use email as username
         UserData tempRegisterData = UserData()
           ..contactNumber = buildMobileNumber()
           ..firstName = firstName
           ..lastName = lastName
           ..loginType = LOGIN_TYPE_USER
           ..userType = USER_TYPE_USER
-          ..username = username
+          ..username = emailCont.text.trim()
           ..email = emailCont.text.trim()
           ..password = passwordCont.text.trim()
           ..address = addressCont.text.trim();

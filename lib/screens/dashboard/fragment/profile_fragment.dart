@@ -10,7 +10,6 @@ import 'package:booking_system_flutter/screens/dashboard/customer_rating_screen.
 import 'package:booking_system_flutter/screens/dashboard/dashboard_screen.dart';
 import 'package:booking_system_flutter/screens/service/favourite_service_screen.dart';
 import 'package:booking_system_flutter/screens/setting_screen.dart';
-import 'package:booking_system_flutter/screens/wallet/user_wallet_balance_screen.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/common.dart';
 import 'package:booking_system_flutter/utils/configs.dart';
@@ -28,7 +27,6 @@ import '../../../utils/app_configuration.dart';
 import '../../bankDetails/view/bank_details.dart';
 import '../../favourite_provider_screen.dart';
 import '../../helpDesk/help_desk_list_screen.dart';
-import '../component/wallet_history.dart';
 
 class ProfileFragment extends StatefulWidget {
   @override
@@ -37,8 +35,6 @@ class ProfileFragment extends StatefulWidget {
 
 class ProfileFragmentState extends State<ProfileFragment> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
-  Future<num>? futureWalletBalance;
 
   @override
   void initState() {
@@ -52,7 +48,6 @@ class ProfileFragmentState extends State<ProfileFragment> {
 
   Future<void> init() async {
     if (appStore.isLoggedIn) {
-      appStore.setUserWalletAmount();
       userDetailAPI();
     }
   }
@@ -152,22 +147,6 @@ class ProfileFragmentState extends State<ProfileFragment> {
                               ).expand(),
                             ],
                           ).paddingOnly(left: 16, top: 16, bottom: 16),
-                          Container(
-                            decoration: BoxDecoration(borderRadius: BorderRadius.vertical(bottom: Radius.circular(8)), color: primaryColor),
-                            child: Row(
-                              children: [
-                                Image.asset(ic_wallet_cartoon, height: 20),
-                                8.width,
-                                Text(language.walletBalance, style: boldTextStyle(color: whiteColor)).onTap(() {
-                                  if (appConfigurationStore.onlinePaymentStatus) {
-                                    UserWalletBalanceScreen().launch(context);
-                                  }
-                                }),
-                                Spacer(),
-                                Text(appStore.userWalletAmount.toPriceFormat(), style: boldTextStyle(color: whiteColor)),
-                              ],
-                            ).paddingAll(16),
-                          ).visible(appConfigurationStore.isEnableUserWallet),
                         ],
                       ),
                     ).paddingOnly(left: 16, right: 16, top: 24),
@@ -178,18 +157,6 @@ class ProfileFragmentState extends State<ProfileFragment> {
                       divider: Offstage(),
                       headerPadding: EdgeInsets.only(bottom: 14, right: 14, left: 16, top: 14),
                       items: [
-                        if (appStore.isLoggedIn && appConfigurationStore.isEnableUserWallet)
-                          SettingItemWidget(
-                            decoration: BoxDecoration(color: context.cardColor),
-                            leading: ic_document.iconImage(size: SETTING_ICON_SIZE),
-                            title: language.walletHistory,
-                            titleTextStyle: boldTextStyle(size: 12),
-                            padding: EdgeInsets.only(top: 20, left: 16, right: 16),
-                            trailing: trailing,
-                            onTap: () {
-                              UserWalletHistoryScreen().launch(context);
-                            },
-                          ),
                         if (appStore.isLoggedIn)
                           SettingItemWidget(
                             decoration: BoxDecoration(color: context.cardColor),

@@ -11,7 +11,7 @@ import 'package:booking_system_flutter/model/remote_config_data_model.dart';
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
-import 'package:booking_system_flutter/model/user_wallet_history.dart';
+// AC Chill - Wallet removed
 import 'package:booking_system_flutter/screens/blog/model/blog_detail_response.dart';
 import 'package:booking_system_flutter/screens/blog/model/blog_response_model.dart';
 import 'package:booking_system_flutter/screens/helpDesk/model/help_desk_response.dart';
@@ -73,8 +73,6 @@ List<BookingData>? cachedBookingList;
 List<CategoryData>? cachedCategoryList;
 List<BookingStatusResponse>? cachedBookingStatusDropdown;
 List<PostJobData>? cachedPostJobList;
-List<WalletDataElement>? cachedWalletHistoryList;
-
 List<ServiceData>? cachedServiceFavList;
 List<UserData>? cachedProviderFavList;
 List<UserData>? cachedHandymanList;

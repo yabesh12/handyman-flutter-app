@@ -183,10 +183,12 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
               // Service details card - white fill
               Container(
                 padding: EdgeInsets.all(14),
-                decoration: boxDecorationWithRoundedCorners(
+                decoration: BoxDecoration(
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  backgroundColor: Colors.white,
-                  border: Border.all(color: primaryColor.withOpacity(0.1)),
+                  boxShadow: [
+                    BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: Offset(0, 2)),
+                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -204,10 +206,12 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
               // Phone number field - mandatory
               Container(
                 padding: EdgeInsets.all(14),
-                decoration: boxDecorationWithRoundedCorners(
+                decoration: BoxDecoration(
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  backgroundColor: Colors.white,
-                  border: Border.all(color: primaryColor.withOpacity(0.1)),
+                  boxShadow: [
+                    BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: Offset(0, 2)),
+                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

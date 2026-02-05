@@ -104,10 +104,12 @@ class ProfileFragmentState extends State<ProfileFragment> {
                 children: [
                   if (appStore.isLoggedIn)
                     Container(
-                      decoration: boxDecorationWithRoundedCorners(
-                        borderRadius: radius(),
-                        backgroundColor: appStore.isDarkMode ? context.cardColor : lightPrimaryColor,
-                        border: Border.all(color: primaryColor),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 12, offset: Offset(0, 4)),
+                        ],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,29 +122,35 @@ class ProfileFragmentState extends State<ProfileFragment> {
                                 alignment: Alignment.bottomCenter,
                                 clipBehavior: Clip.none,
                                 children: [
-                                  CachedImageWidget(url: appStore.userProfileImage, height: 70, width: 70, circle: true, fit: BoxFit.cover).paddingBottom(6),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(color: primaryColor.withOpacity(0.3), width: 2),
+                                    ),
+                                    child: CachedImageWidget(url: appStore.userProfileImage, height: 70, width: 70, circle: true, fit: BoxFit.cover),
+                                  ).paddingBottom(6),
                                   Positioned(
                                     child: Container(
                                       alignment: Alignment.center,
-                                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-                                      decoration: boxDecorationDefault(
+                                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+                                      decoration: BoxDecoration(
                                         color: primaryColor,
-                                        border: Border.all(color: primaryLightColor, width: 2),
                                         borderRadius: BorderRadius.circular(16),
                                       ),
-                                      child: Text(language.lblEdit, style: secondaryTextStyle(color: whiteColor, size: 12)),
+                                      child: Text(language.lblEdit, style: secondaryTextStyle(color: whiteColor, size: 11)),
                                     ).onTap(() {
                                       EditProfileScreen().launch(context);
                                     }),
                                   ),
                                 ],
                               ),
-                              24.width,
+                              20.width,
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Marquee(child: Text(appStore.userFullName, style: boldTextStyle(color: primaryColor, size: 16))),
-                                  Marquee(child: Text(appStore.userEmail, style: secondaryTextStyle())),
+                                  Marquee(child: Text(appStore.userFullName, style: boldTextStyle(color: appTextPrimaryColor, size: 16))),
+                                  4.height,
+                                  Marquee(child: Text(appStore.userEmail, style: secondaryTextStyle(size: 12))),
                                 ],
                               ).expand(),
                             ],

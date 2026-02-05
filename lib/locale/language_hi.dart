@@ -2064,7 +2064,7 @@ class LanguageHi extends BaseLanguage {
   @override
   String get chooseYourDateRange => 'अपनी दिनांक सीमा चुनें';
 
-  // AC Chill - OTP Translations
+  // UX Serve - OTP Translations
   @override
   String get verifyResetOTP => 'पासवर्ड रीसेट OTP सत्यापित करें';
 

@@ -1,4 +1,4 @@
-// AC Chill - Firebase Firestore removed
+// UX Serve - Firebase Firestore removed
 
 class ContactModel {
   String? uid;

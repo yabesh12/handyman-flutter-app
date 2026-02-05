@@ -226,7 +226,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
           if ((data as String).isJson()) {
             LoginResponse res = LoginResponse.fromJson(jsonDecode(data));
 
-            // AC Chill - Firebase profile update disabled
+            // UX Serve - Firebase profile update disabled
             saveUserData(res.userData!);
             finish(context);
             toast(res.message.validate().capitalizeFirstLetter());

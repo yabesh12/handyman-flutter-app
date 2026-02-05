@@ -2064,7 +2064,7 @@ class LanguageFr extends BaseLanguage {
   @override
   String get chooseYourDateRange => 'Choisissez votre plage de dates';
 
-  // AC Chill - OTP Translations
+  // UX Serve - OTP Translations
   @override
   String get verifyResetOTP => 'Vérifier le code OTP de réinitialisation';
 

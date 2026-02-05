@@ -95,7 +95,7 @@ class _SettingScreenState extends State<SettingScreen> {
               ).withHeight(18),
             ),
           ),
-          // AC Chill - Push notification setting disabled (Firebase removed)
+          // UX Serve - Push notification setting disabled (Firebase removed)
           SnapHelperWidget<bool>(
             future: isAndroid12Above(),
             onSuccess: (data) {

@@ -1,7 +1,7 @@
 import 'package:booking_system_flutter/utils/configs.dart';
 import 'package:flutter/material.dart';
 
-// AC Chill Theme - Cool Blue
+// UX Serve Theme - Cool Blue
 var primaryColor = defaultPrimaryColor;
 const secondaryPrimaryColor = Color(0xFFE3F2FD);    // Light Blue Background
 const lightPrimaryColor = Color(0xFFBBDEFB);        // Lighter Blue

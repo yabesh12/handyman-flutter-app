@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-// AC Chill - Wallet balance component removed
+// UX Serve - Wallet balance component removed
 // import '../../../component/wallet_balance_component.dart';
 import '../../../model/booking_amount_model.dart';
 import '../../../utils/booking_calculations_logic.dart';
@@ -324,7 +324,7 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
 
               priceWidget(),
 
-              // AC Chill - Wallet balance component removed
+              // UX Serve - Wallet balance component removed
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -14,7 +14,7 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="AC Chill"
+        android:label="UX Serve"
         android:requestLegacyExternalStorage="true"
         tools:replace="android:label">
         <meta-data

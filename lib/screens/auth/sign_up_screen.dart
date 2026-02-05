@@ -12,7 +12,7 @@ import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:booking_system_flutter/utils/images.dart';
 import 'package:booking_system_flutter/utils/string_extensions.dart';
 import 'package:country_picker/country_picker.dart';
-// AC Chill - Firebase Auth removed
+// UX Serve - Firebase Auth removed
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,7 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   Country selectedCountry = defaultCountry();
 
-  // AC Chill - Simplified registration with full name
+  // UX Serve - Simplified registration with full name
   TextEditingController fullNameCont = TextEditingController();
   TextEditingController emailCont = TextEditingController();
   TextEditingController mobileCont = TextEditingController();
@@ -94,12 +94,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
         formKey.currentState!.save();
         appStore.setLoading(true);
 
-        // AC Chill - Split full name into first and last name for OTP registration
+        // UX Serve - Split full name into first and last name for OTP registration
         String fullName = fullNameCont.text.trim();
         String firstName = fullName.split(' ').first;
         String lastName = fullName.split(' ').length > 1
             ? fullName.split(' ').skip(1).join(' ')
-            : '';
+            : firstName;
 
         UserData userResponse = UserData()
           ..username = widget.phoneNumber.validate().trim()
@@ -112,7 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ..uid = widget.uid.validate()
           ..password = widget.phoneNumber.validate().trim();
 
-        // AC Chill - Firebase OTP credential linking disabled
+        // UX Serve - Firebase OTP credential linking disabled
 
         await createUsers(tempRegisterData: userResponse);
       }
@@ -156,15 +156,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (isAcceptedTc) {
         appStore.setLoading(true);
 
-        // AC Chill - Split full name into first and last name
+        // UX Serve - Split full name into first and last name
         String fullName = fullNameCont.text.trim();
         String firstName = fullName.split(' ').first;
         String lastName = fullName.split(' ').length > 1
             ? fullName.split(' ').skip(1).join(' ')
-            : '';
+            : firstName;
 
         /// Create a temporary request to send
-        /// AC Chill - Use email as username
+        /// UX Serve - Use email as username
         UserData tempRegisterData = UserData()
           ..contactNumber = buildMobileNumber()
           ..firstName = firstName
@@ -194,7 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       toast(registerResponse.message.validate());
       await appStore.setLoginType(tempRegisterData.loginType!);
 
-      // AC Chill - Navigate to OTP verification screen
+      // UX Serve - Navigate to OTP verification screen
       bool? verified = await EmailOTPVerificationScreen(
         email: emailCont.text.trim(),
         isFromForgotPassword: false,
@@ -237,7 +237,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Column(
       children: [
         32.height,
-        // AC Chill - Full Name field (required)
+        // UX Serve - Full Name field (required)
         AppTextField(
           textFieldType: TextFieldType.NAME,
           controller: fullNameCont,
@@ -317,7 +317,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               errorThisFieldRequired: language.requiredText,
               nextFocus: addressFocus,
               isValidationRequired: false,
-              decoration: inputDecoration(context, labelText: "${language.hintContactNumberTxt} (${language.notAvailable.toLowerCase()})").copyWith(
+              decoration: inputDecoration(context, labelText: "${language.hintContactNumberTxt} (optional)").copyWith(
                 hintText: '${language.lblExample}: ${selectedCountry.example}',
                 hintStyle: secondaryTextStyle(),
               ),
@@ -335,7 +335,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           isValidationRequired: false,
           maxLines: 2,
           minLines: 2,
-          decoration: inputDecoration(context, labelText: "${language.hintAddress} (${language.notAvailable.toLowerCase()})"),
+          decoration: inputDecoration(context, labelText: "${language.hintAddress} (optional)"),
         ),
         16.height,
         _buildTcAcceptWidget(),

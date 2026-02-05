@@ -1,4 +1,4 @@
-// AC Chill - Firebase messaging removed (stub file)
+// UX Serve - Firebase messaging removed (stub file)
 // These functions are called throughout the app, so we keep them as no-ops
 
 import '../main.dart';

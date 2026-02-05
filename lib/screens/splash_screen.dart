@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
       log('Backend not configured, running in static mode');
     }
 
-    // AC Chill - Force INR currency (override backend settings until admin panel is updated)
+    // UX Serve - Force INR currency (override backend settings until admin panel is updated)
     await appConfigurationStore.setCurrencySymbol('₹');
     await appConfigurationStore.setCurrencyCode('INR');
     await appConfigurationStore.setCurrencyPosition(CURRENCY_POSITION_LEFT);

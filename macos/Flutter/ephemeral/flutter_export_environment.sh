@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=C:\Users\sympo\AppData\Local\flutter_windows_3.32.7-stable\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\Users\sympo\Downloads\handyman_user_flutter_v11.10.0"
+export "FLUTTER_ROOT=/home/developer/snap/flutter/common/flutter"
+export "FLUTTER_APPLICATION_PATH=/home/developer/AC-Chill/frontend"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=11.10.0"

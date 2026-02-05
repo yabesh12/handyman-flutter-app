@@ -160,7 +160,7 @@ Future<void> clearPreferences() async {
   await setValue(USER_PASSWORD, '');
   await removeKey(IS_SUBSCRIBED_FOR_PUSH_NOTIFICATION);
 
-  // AC Chill - Firebase Auth sign out disabled
+  // UX Serve - Firebase Auth sign out disabled
 
   appStore.setUserWalletAmount();
 }
@@ -239,7 +239,7 @@ Future<BaseResponseModel> forgotPassword(Map request) async {
   return BaseResponseModel.fromJson(await handleResponse(await buildHttpResponse('forgot-password', request: request, method: HttpMethodType.POST)));
 }
 
-// AC Chill - Email OTP Authentication APIs
+// UX Serve - Email OTP Authentication APIs
 Future<BaseResponseModel> verifyEmailOTP(Map request) async {
   return BaseResponseModel.fromJson(await handleResponse(await buildHttpResponse('verify-email-otp', request: request, method: HttpMethodType.POST)));
 }

@@ -2,7 +2,7 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    // AC Chill - Firebase removed
+    // UX Serve - Firebase removed
     // id "com.google.gms.google-services"
 }
 
@@ -94,7 +94,7 @@ flutter {
 
 dependencies {
     implementation "androidx.appcompat:appcompat:1.4.2"
-    // AC Chill - Firebase removed
+    // UX Serve - Firebase removed
     // implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
     // implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.material:material:1.5.0'

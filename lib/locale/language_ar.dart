@@ -2064,7 +2064,7 @@ class LanguageAr extends BaseLanguage {
   @override
   String get chooseYourDateRange => 'اختر النطاق الزمني الخاص بك';
 
-  // AC Chill - OTP Translations
+  // UX Serve - OTP Translations
   @override
   String get verifyResetOTP => 'التحقق من رمز OTP لإعادة تعيين كلمة المرور';
 

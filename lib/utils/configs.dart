@@ -4,7 +4,7 @@ import 'package:booking_system_flutter/app_config.dart';
 
 const APP_NAME = AppConfig.appName;
 const APP_NAME_TAG_LINE = AppConfig.appTagLine;
-// AC Chill Theme - Cool Blue (#1E88E5)
+// UX Serve Theme - Cool Blue (#1E88E5)
 var defaultPrimaryColor = Color(0xFF1E88E5);
 
 // Don't add slash at the end of the url

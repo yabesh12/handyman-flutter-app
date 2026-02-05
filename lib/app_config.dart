@@ -1,5 +1,5 @@
 /// ============================================================
-/// AC CHILL - APP CONFIGURATION FILE
+/// UX SERVE - APP CONFIGURATION FILE
 /// ============================================================
 /// AC Service Booking App - Chennai, South India
 /// ============================================================
@@ -11,7 +11,7 @@ class AppConfig {
   // APP BRANDING
   // ============================================================
 
-  static const String appName = 'AC Chill';
+  static const String appName = 'UX Serve';
   static const String appTagLine = 'Cool Comfort at Your Doorstep';
   static const String appLogo = 'assets/app_logo.png';
 

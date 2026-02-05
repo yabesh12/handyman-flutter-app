@@ -1,4 +1,4 @@
-// AC Chill - Firebase Firestore removed (stub file)
+// UX Serve - Firebase Firestore removed (stub file)
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
 import 'package:nb_utils/nb_utils.dart';

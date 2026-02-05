@@ -1,4 +1,4 @@
-// AC Chill - Firebase Firestore removed (stub file)
+// UX Serve - Firebase Firestore removed (stub file)
 import 'package:nb_utils/nb_utils.dart';
 
 abstract class BaseService {

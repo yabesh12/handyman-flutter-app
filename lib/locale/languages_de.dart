@@ -2063,7 +2063,7 @@ class LanguageDe extends BaseLanguage {
   @override
   String get chooseYourDateRange => 'Wählen Sie Ihren Datumsbereich';
 
-  // AC Chill - OTP Translations
+  // UX Serve - OTP Translations
   @override
   String get verifyResetOTP => 'Passwort-Reset OTP verifizieren';
 

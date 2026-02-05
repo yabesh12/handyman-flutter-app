@@ -12,7 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../model/booking_data_model.dart';
 import '../../../utils/model_keys.dart';
-// AC Chill - Chat module removed
+// UX Serve - Chat module removed
 
 class BookingDetailProviderWidget extends StatefulWidget {
   final UserData providerData;
@@ -199,7 +199,7 @@ class BookingDetailProviderWidgetState extends State<BookingDetailProviderWidget
                       launchCall(widget.providerData.contactNumber.validate());
                     },
                   ).expand(),
-                // AC Chill - Chat button removed
+                // UX Serve - Chat button removed
               ],
             ).paddingTop(8),
         ],

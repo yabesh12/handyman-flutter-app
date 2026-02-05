@@ -1,4 +1,4 @@
-// AC Chill - Firebase Phone OTP removed
+// UX Serve - Firebase Phone OTP removed
 // This screen is kept as a stub to avoid breaking imports
 
 import 'package:booking_system_flutter/component/back_widget.dart';

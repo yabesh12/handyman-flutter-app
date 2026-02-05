@@ -83,7 +83,7 @@ class _SignInScreenState extends State<SignInScreen> {
       await setValue(IS_REMEMBERED, isRemember);
       await appStore.setLoginType(LOGIN_TYPE_USER);
 
-      // AC Chill - Firebase verification disabled
+      // UX Serve - Firebase verification disabled
       TextInput.finishAutofillContext();
 
       onLoginSuccessRedirection();
@@ -192,24 +192,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ],
         ),
-        TextButton(
-          onPressed: () {
-            if (isAndroid) {
-              if (getStringAsync(PROVIDER_PLAY_STORE_URL).isNotEmpty) {
-                launchUrl(Uri.parse(getStringAsync(PROVIDER_PLAY_STORE_URL)), mode: LaunchMode.externalApplication);
-              } else {
-                launchUrl(Uri.parse('${getSocialMediaLink(LinkProvider.PLAY_STORE)}$PROVIDER_PACKAGE_NAME'), mode: LaunchMode.externalApplication);
-              }
-            } else if (isIOS) {
-              if (getStringAsync(PROVIDER_APPSTORE_URL).isNotEmpty) {
-                commonLaunchUrl(getStringAsync(PROVIDER_APPSTORE_URL));
-              } else {
-                commonLaunchUrl(IOS_LINK_FOR_PARTNER);
-              }
-            }
-          },
-          child: Text(language.lblRegisterAsPartner, style: boldTextStyle(color: primaryColor)),
-        )
+// UX Serve - Register as Partner removed (no providers)
       ],
     );
   }
@@ -294,7 +277,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     _buildRememberWidget(),
-                    // AC Chill - Social login removed
+                    // UX Serve - Social login removed
                     30.height,
                   ],
                 );

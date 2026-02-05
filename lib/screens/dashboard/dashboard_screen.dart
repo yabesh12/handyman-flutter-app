@@ -23,7 +23,7 @@ import '../newDashboard/dashboard_4/dashboard_fragment_4.dart';
 
 import '../category/category_screen.dart';
 
-// AC Chill - Chat removed, Services tab added
+// UX Serve - Chat removed, Services tab added
 
 class DashboardScreen extends StatefulWidget {
   final bool? redirectToBooking;
@@ -58,7 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       };
     });
 
-    // AC Chill - Firebase notification handling disabled
+    // UX Serve - Firebase notification handling disabled
 
     init();
   }
@@ -105,7 +105,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void dispose() {
     super.dispose();
-    // AC Chill - Firebase LiveStream disabled
+    // UX Serve - Firebase LiveStream disabled
   }
 
   @override
@@ -116,7 +116,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         body: AnimatedOpacity(
           opacity: 1,
           duration: Duration(milliseconds: 500),
-          // AC Chill - Navigation: Home, Bookings, Services, Profile (4 tabs)
+          // UX Serve - Navigation: Home, Bookings, Services, Profile (4 tabs)
           child: [
             Observer(
               builder: (context) {
@@ -149,7 +149,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               surfaceTintColor: Colors.transparent,
               shadowColor: Colors.transparent,
             ),
-            // AC Chill - 4 tabs: Home, Bookings, Services, Profile
+            // UX Serve - 4 tabs: Home, Bookings, Services, Profile
             child: NavigationBar(
               selectedIndex: currentIndex,
               destinations: [

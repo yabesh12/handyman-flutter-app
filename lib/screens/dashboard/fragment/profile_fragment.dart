@@ -157,18 +157,7 @@ class ProfileFragmentState extends State<ProfileFragment> {
                       divider: Offstage(),
                       headerPadding: EdgeInsets.only(bottom: 14, right: 14, left: 16, top: 14),
                       items: [
-                        if (appStore.isLoggedIn)
-                          SettingItemWidget(
-                            decoration: BoxDecoration(color: context.cardColor),
-                            leading: ic_document.iconImage(size: SETTING_ICON_SIZE),
-                            title: language.lblBankDetails,
-                            titleTextStyle: boldTextStyle(size: 12),
-                            trailing: trailing,
-                            padding: EdgeInsets.only(top: 20, left: 16, right: 16),
-                            onTap: () {
-                              BankDetails().launch(context);
-                            },
-                          ),
+                        // UX Serve - Bank Details removed (not needed for AC service customers)
                         SettingItemWidget(
                           decoration: BoxDecoration(color: context.cardColor),
                           leading: ic_heart.iconImage(size: SETTING_ICON_SIZE),
@@ -182,19 +171,7 @@ class ProfileFragmentState extends State<ProfileFragment> {
                             });
                           },
                         ),
-                        SettingItemWidget(
-                          decoration: BoxDecoration(color: context.cardColor),
-                          leading: ic_heart.iconImage(size: SETTING_ICON_SIZE),
-                          title: language.favouriteProvider,
-                          titleTextStyle: boldTextStyle(size: 12),
-                          trailing: trailing,
-                          padding: EdgeInsets.only(top: 20, left: 16, right: 16),
-                          onTap: () {
-                            doIfLoggedIn(context, () {
-                              FavouriteProviderScreen().launch(context);
-                            });
-                          },
-                        ),
+                        // UX Serve - Favourite Provider removed (no providers)
                         if (appConfigurationStore.blogStatus)
                           SettingItemWidget(
                             decoration: BoxDecoration(color: context.cardColor),

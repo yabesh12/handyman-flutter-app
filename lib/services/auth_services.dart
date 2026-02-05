@@ -1,4 +1,4 @@
-// AC Chill - Firebase Auth removed (stub file)
+// UX Serve - Firebase Auth removed (stub file)
 // Social login and Firebase verification disabled
 
 import 'package:booking_system_flutter/main.dart';

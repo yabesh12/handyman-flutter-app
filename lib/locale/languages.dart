@@ -1377,7 +1377,7 @@ abstract class BaseLanguage {
 
   String get chooseYourDateRange;
 
-  // AC Chill - Email OTP Authentication
+  // UX Serve - Email OTP Authentication
   String get verifyResetOTP;
   String get enterOTPSentTo;
   String get verify;

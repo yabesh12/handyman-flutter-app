@@ -2,7 +2,7 @@ import 'package:booking_system_flutter/locale/languages.dart';
 import 'package:booking_system_flutter/utils/configs.dart';
 
 class LanguageEn extends BaseLanguage {
-  // AC Chill - Updated walkthrough titles
+  // UX Serve - Updated walkthrough titles
   @override
   String get walkTitle1 => 'Book AC Services Easily';
 
@@ -237,7 +237,7 @@ class LanguageEn extends BaseLanguage {
   @override
   String get btnSubmit => "Submit";
 
-  // AC Chill - Updated walkthrough descriptions
+  // UX Serve - Updated walkthrough descriptions
   @override
   String get walkThrough1 => 'Browse our AC services including installation, repair, maintenance, gas refill, and deep cleaning. Book with just a few taps.';
 
@@ -2065,7 +2065,7 @@ class LanguageEn extends BaseLanguage {
   @override
   String get chooseYourDateRange => 'Choose your Date Range';
 
-  // AC Chill - Email OTP Authentication
+  // UX Serve - Email OTP Authentication
   @override
   String get verifyResetOTP => 'Verify Reset OTP';
 

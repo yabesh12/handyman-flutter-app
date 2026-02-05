@@ -16,7 +16,7 @@ import '../../utils/configs.dart';
 import '../../utils/model_keys.dart';
 import '../dashboard/dashboard_screen.dart';
 
-// AC Chill - Simplified Payment Screen (COD Only)
+// UX Serve - Simplified Payment Screen (COD Only)
 class PaymentScreen extends StatefulWidget {
   final BookingDetailResponse bookings;
   final bool isForAdvancePayment;
@@ -56,12 +56,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   void init() async {
     log("ISaDVANCE${widget.isForAdvancePayment}");
-    // AC Chill - Only COD payment method
+    // UX Serve - Only COD payment method
     future = _getCODPaymentOnly();
     setState(() {});
   }
 
-  // AC Chill - Return only COD payment option
+  // UX Serve - Return only COD payment option
   Future<List<PaymentSetting>> _getCODPaymentOnly() async {
     // Create COD payment option
     List<PaymentSetting> codOnly = [
@@ -85,7 +85,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   Future<void> _handleClick() async {
     appStore.setLoading(true);
-    // AC Chill - Only COD payment
+    // UX Serve - Only COD payment
     if (currentPaymentMethod!.type == PAYMENT_METHOD_COD) {
       savePay(paymentMethod: PAYMENT_METHOD_COD, paymentStatus: SERVICE_PAYMENT_STATUS_PENDING);
     }
@@ -188,7 +188,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   );
                 },
               ),
-              // AC Chill - Wallet balance component removed
+              // UX Serve - Wallet balance component removed
               16.height,
               if (!appStore.isLoading)
                 AppButton(
@@ -197,7 +197,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       return toast(language.chooseAnyOnePayment);
                     }
 
-                    // AC Chill - Only COD confirmation
+                    // UX Serve - Only COD confirmation
                     showConfirmDialogCustom(
                       context,
                       dialogType: DialogType.CONFIRMATION,

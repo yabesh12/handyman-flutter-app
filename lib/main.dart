@@ -11,13 +11,13 @@ import 'package:booking_system_flutter/model/remote_config_data_model.dart';
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
-// AC Chill - Wallet removed
+// UX Serve - Wallet removed
 import 'package:booking_system_flutter/screens/blog/model/blog_detail_response.dart';
 import 'package:booking_system_flutter/screens/blog/model/blog_response_model.dart';
 import 'package:booking_system_flutter/screens/helpDesk/model/help_desk_response.dart';
 import 'package:booking_system_flutter/screens/splash_screen.dart';
 import 'package:booking_system_flutter/services/auth_services.dart';
-// AC Chill - Chat module removed
+// UX Serve - Chat module removed
 import 'package:booking_system_flutter/services/user_services.dart';
 import 'package:booking_system_flutter/store/app_configuration_store.dart';
 import 'package:booking_system_flutter/store/app_store.dart';
@@ -53,7 +53,7 @@ BaseLanguage language = LanguageEn();
 //region Services
 UserService userService = UserService();
 AuthService authService = AuthService();
-// AC Chill - Chat module removed
+// UX Serve - Chat module removed
 RemoteConfigDataModel remoteConfigDataModel = RemoteConfigDataModel();
 //endregion
 
@@ -83,7 +83,7 @@ List<WalletDataElement>? cachedWalletHistoryList;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // AC Chill - Firebase removed (kept for future integration)
+  // UX Serve - Firebase removed (kept for future integration)
 
   passwordLengthGlobal = 6;
   appButtonBackgroundColorGlobal = primaryColor;

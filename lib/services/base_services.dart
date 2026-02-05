@@ -1,51 +1,38 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// AC Chill - Firebase Firestore removed (stub file)
 import 'package:nb_utils/nb_utils.dart';
 
 abstract class BaseService {
-  CollectionReference? ref;
+  dynamic ref;
 
   BaseService({this.ref});
 
-  Future<DocumentReference> addDocument(Map data) async {
-    var doc = await ref!.add(data);
-    doc.update({'uid': doc.id});
-    return doc;
+  Future<dynamic> addDocument(Map data) async {
+    // Firestore disabled
+    return null;
   }
 
-  Future<DocumentReference> addDocumentWithCustomId(String id, Map<String, dynamic> data) async {
-    var doc = ref!.doc(id);
-
-    return await doc.set(data).then((value) {
-      log('Added: $data');
-
-      return doc;
-    }).catchError((e) {
-      log(e);
-      throw e;
-    });
+  Future<dynamic> addDocumentWithCustomId(String id, Map<String, dynamic> data) async {
+    // Firestore disabled
+    return null;
   }
 
-  Future<void> updateDocument(Map<String, dynamic> data, String? id) => ref!.doc(id).update(data);
+  Future<void> updateDocument(Map<String, dynamic> data, String? id) async {
+    // Firestore disabled
+  }
 
-  Future<void> removeDocument(String id) => ref!.doc(id).delete();
+  Future<void> removeDocument(String id) async {
+    // Firestore disabled
+  }
 
   Future<bool> isUserExist(String? email) async {
-    Query query = ref!.limit(1).where('email', isEqualTo: email);
-    var res = await query.get();
-
-    return res.docs.isNotEmpty;
+    return false;
   }
 
   Future<bool> isUserExistWithUid(String? uid) async {
-    Query query = ref!.limit(1).where('uid', isEqualTo: uid);
-    var res = await query.get();
-
-    return res.docs.isNotEmpty;
+    return false;
   }
 
   Future<Iterable> getList() async {
-    var res = await ref!.get();
-    Iterable it = res.docs;
-    return it;
+    return [];
   }
 }

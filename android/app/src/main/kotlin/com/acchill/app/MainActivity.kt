@@ -1,4 +1,4 @@
-package com.yourcompany.yourapp
+package com.acchill.app
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity

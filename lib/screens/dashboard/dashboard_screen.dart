@@ -9,8 +9,6 @@ import 'package:booking_system_flutter/utils/common.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:booking_system_flutter/utils/images.dart';
 import 'package:booking_system_flutter/utils/string_extensions.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -18,7 +16,6 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../component/voice_search_component.dart';
 import '../../utils/app_configuration.dart';
-import '../../utils/firebase_messaging_utils.dart';
 import '../newDashboard/dashboard_1/dashboard_fragment_1.dart';
 import '../newDashboard/dashboard_2/dashboard_fragment_2.dart';
 import '../newDashboard/dashboard_3/dashboard_fragment_3.dart';
@@ -61,30 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       };
     });
 
-    /// Handle Firebase Notification click and redirect to that Service & BookDetail screen
-    LiveStream().on(LIVESTREAM_FIREBASE, (value) {
-      if (value == 3) {
-        currentIndex = 3;
-        setState(() {});
-      }
-    });
-
-    Firebase.initializeApp().then((value) {
-      //When the app is in the background and opened directly from the push notification.
-      FirebaseMessaging.onMessageOpenedApp.listen((message) async {
-        //Handle onClick Notification
-        log("data 1 ==> ${message.data}");
-        handleNotificationClick(message);
-      });
-
-      FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
-        //Handle onClick Notification
-        if (message != null) {
-          log("data 2 ==> ${message.data}");
-          handleNotificationClick(message);
-        }
-      });
-    }).catchError(onError);
+    // AC Chill - Firebase notification handling disabled
 
     init();
   }
@@ -131,7 +105,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void dispose() {
     super.dispose();
-    LiveStream().dispose(LIVESTREAM_FIREBASE);
+    // AC Chill - Firebase LiveStream disabled
   }
 
   @override

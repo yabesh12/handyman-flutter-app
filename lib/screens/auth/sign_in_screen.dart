@@ -83,7 +83,7 @@ class _SignInScreenState extends State<SignInScreen> {
       await setValue(IS_REMEMBERED, isRemember);
       await appStore.setLoginType(LOGIN_TYPE_USER);
 
-      authService.verifyFirebaseUser();
+      // AC Chill - Firebase verification disabled
       TextInput.finishAutofillContext();
 
       onLoginSuccessRedirection();

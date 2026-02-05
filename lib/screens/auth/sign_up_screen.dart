@@ -12,7 +12,7 @@ import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:booking_system_flutter/utils/images.dart';
 import 'package:booking_system_flutter/utils/string_extensions.dart';
 import 'package:country_picker/country_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// AC Chill - Firebase Auth removed
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -112,18 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ..uid = widget.uid.validate()
           ..password = widget.phoneNumber.validate().trim();
 
-        /// Link OTP login with Email Auth
-        if (widget.tokenForOTPCredentials != null) {
-          try {
-            AuthCredential credential = PhoneAuthProvider.credentialFromToken(widget.tokenForOTPCredentials!);
-            UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-
-            AuthCredential emailAuthCredential = EmailAuthProvider.credential(email: emailCont.text.trim(), password: DEFAULT_FIREBASE_PASSWORD);
-            userCredential.user!.linkWithCredential(emailAuthCredential);
-          } catch (e) {
-            print(e);
-          }
-        }
+        // AC Chill - Firebase OTP credential linking disabled
 
         await createUsers(tempRegisterData: userResponse);
       }

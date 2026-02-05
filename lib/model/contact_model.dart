@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// AC Chill - Firebase Firestore removed
 
 class ContactModel {
   String? uid;
-  Timestamp? addedOn;
+  dynamic addedOn;
   int? lastMessageTime;
   int? unReadFromUser;
 

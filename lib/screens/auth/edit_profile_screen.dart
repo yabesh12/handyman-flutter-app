@@ -17,9 +17,7 @@ import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:booking_system_flutter/utils/images.dart';
 import 'package:booking_system_flutter/utils/model_keys.dart';
 import 'package:booking_system_flutter/utils/string_extensions.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_picker/country_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -228,13 +226,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
           if ((data as String).isJson()) {
             LoginResponse res = LoginResponse.fromJson(jsonDecode(data));
 
-            if (FirebaseAuth.instance.currentUser != null) {
-              userService.updateDocument({
-                'profile_image': res.userData!.profileImage.validate(),
-                'updated_at': Timestamp.now().toDate().toString(),
-              }, FirebaseAuth.instance.currentUser!.uid);
-            }
-
+            // AC Chill - Firebase profile update disabled
             saveUserData(res.userData!);
             finish(context);
             toast(res.message.validate().capitalizeFirstLetter());

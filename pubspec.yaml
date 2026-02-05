@@ -22,16 +22,6 @@ dependencies:
   speech_to_text: ^7.0.0
   custom_date_range_picker: ^1.1.0
 
-  # FIREBASE
-  firebase_core: ^3.6.0
-  firebase_crashlytics: ^4.1.3
-  firebase_auth: ^5.3.1
-  firebase_storage: ^12.3.3
-  cloud_firestore: ^5.4.4
-  firebase_pagination: ^4.0.1
-
-  # FIREBASE MESSAGING
-  firebase_messaging: ^15.1.3
   flutter_local_notifications: ^17.2.3
 
   # STATE MANAGEMENT
@@ -58,9 +48,9 @@ dependencies:
   webview_flutter: ^4.9.0
   file_picker: ^8.1.2
 
-  # SOCIAL LOGIN
-  google_sign_in: ^6.2.1
-  the_apple_sign_in: ^1.1.1
+  # SOCIAL LOGIN (disabled - kept for future)
+  # google_sign_in: ^6.2.1
+  # the_apple_sign_in: ^1.1.1
 
   # PAYMENT GATEWAYS
   midpay:

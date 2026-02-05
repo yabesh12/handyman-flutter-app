@@ -32,7 +32,6 @@ import 'package:booking_system_flutter/utils/configs.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:booking_system_flutter/utils/images.dart';
 import 'package:booking_system_flutter/utils/model_keys.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -161,11 +160,7 @@ Future<void> clearPreferences() async {
   await setValue(USER_PASSWORD, '');
   await removeKey(IS_SUBSCRIBED_FOR_PUSH_NOTIFICATION);
 
-  try {
-    FirebaseAuth.instance.signOut();
-  } catch (e) {
-    print(e);
-  }
+  // AC Chill - Firebase Auth sign out disabled
 
   appStore.setUserWalletAmount();
 }

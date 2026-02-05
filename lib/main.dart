@@ -26,10 +26,6 @@ import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/common.dart';
 import 'package:booking_system_flutter/utils/configs.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
-import 'package:booking_system_flutter/utils/firebase_messaging_utils.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -42,14 +38,8 @@ import 'model/booking_status_model.dart';
 import 'model/category_model.dart';
 import 'model/coupon_list_model.dart';
 import 'model/dashboard_model.dart';
+import 'model/user_wallet_history.dart';
 
-//region Handle Background Firebase Message
-Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  log('Message Data : ${message.data}');
-  await Firebase.initializeApp().then((value) {}).catchError((e) {});
-}
-
-//endregion
 //region Mobx Stores
 AppStore appStore = AppStore();
 FilterStore filterStore = FilterStore();
@@ -87,17 +77,13 @@ List<(int serviceId, ServiceDetailResponse list)?> listOfCachedData = [];
 List<(int providerId, ProviderInfoResponse list)?> cachedProviderList = [];
 List<(int categoryId, List<CategoryData> list)?> cachedSubcategoryList = [];
 List<(int bookingId, BookingDetailResponse list)?> cachedBookingDetailList = [];
+List<WalletDataElement>? cachedWalletHistoryList;
 //endregion
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) {
-    /// Firebase Notification
-    initFirebaseMessaging();
-    if (kReleaseMode) {
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-    }
-  });
+
+  // AC Chill - Firebase removed (kept for future integration)
 
   passwordLengthGlobal = 6;
   appButtonBackgroundColorGlobal = primaryColor;

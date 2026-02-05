@@ -13,8 +13,9 @@ import 'package:nb_utils/nb_utils.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   final String email;
+  final String otp;
 
-  ResetPasswordScreen({required this.email});
+  ResetPasswordScreen({required this.email, required this.otp});
 
   @override
   _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
@@ -49,6 +50,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
       Map<String, dynamic> request = {
         'email': widget.email,
+        'otp': widget.otp,
         'password': passwordCont.text,
         'password_confirmation': confirmPasswordCont.text,
       };

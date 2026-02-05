@@ -45,16 +45,22 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         appStore.setLoading(false);
         toast(res.message.validate());
 
-        // Step 2: Navigate to OTP verification
-        bool? otpVerified = await EmailOTPVerificationScreen(
-          email: emailCont.text.trim(),
-          isFromForgotPassword: true,
-        ).launch(context);
+        // Step 2: Navigate to OTP verification (returns OTP string on success)
+        String? verifiedOtp = await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => EmailOTPVerificationScreen(
+              email: emailCont.text.trim(),
+              isFromForgotPassword: true,
+            ),
+          ),
+        );
 
-        if (otpVerified == true) {
-          // Step 3: Navigate to reset password screen
+        if (verifiedOtp != null && verifiedOtp.isNotEmpty) {
+          // Step 3: Navigate to reset password screen with OTP
           bool? passwordReset = await ResetPasswordScreen(
             email: emailCont.text.trim(),
+            otp: verifiedOtp,
           ).launch(context);
 
           if (passwordReset == true) {

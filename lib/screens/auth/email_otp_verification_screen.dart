@@ -82,7 +82,7 @@ class _EmailOTPVerificationScreenState extends State<EmailOTPVerificationScreen>
         await verifyResetOTP(request);
         appStore.setLoading(false);
         toast(language.otpVerifiedSuccessfully);
-        finish(context, true);
+        Navigator.pop(context, otpController.text);
       } else {
         await verifyEmailOTP(request);
         appStore.setLoading(false);

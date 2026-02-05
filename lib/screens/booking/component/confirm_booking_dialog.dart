@@ -10,6 +10,7 @@ import 'package:booking_system_flutter/utils/extensions/num_extenstions.dart';
 import 'package:booking_system_flutter/utils/model_keys.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -37,10 +38,29 @@ class ConfirmBookingDialog extends StatefulWidget {
 class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
   Map? selectedPackage;
   List<int> selectedService = [];
+  TextEditingController phoneController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool isSelected = false;
 
+  @override
+  void initState() {
+    super.initState();
+    // Pre-fill phone number from user profile if available
+    if (appStore.userContactNumber.isNotEmpty) {
+      phoneController.text = appStore.userContactNumber;
+    }
+  }
+
+  @override
+  void dispose() {
+    phoneController.dispose();
+    super.dispose();
+  }
+
   Future<void> bookServices() async {
+    if (!_formKey.currentState!.validate()) return;
+
     if (widget.selectedPackage != null) {
       if (widget.selectedPackage!.serviceList != null) {
         widget.selectedPackage!.serviceList!.forEach((element) {
@@ -80,6 +100,7 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
       BookingServiceKeys.type: BOOKING_TYPE_SERVICE,
       BookingServiceKeys.bookingPackage: widget.selectedPackage != null ? selectedPackage : null,
       BookingServiceKeys.serviceAddonId: serviceAddonStore.selectedServiceAddon.map((e) => e.id).toList(),
+      'phone_number': phoneController.text.trim(),
     };
     if (widget.bookingAmountModel != null) {
       request.addAll(widget.bookingAmountModel!.toJson());
@@ -132,119 +153,186 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(language.lblConfirmBooking, style: boldTextStyle(size: 16)),
-                GestureDetector(
-                  onTap: () {
-                    finish(context);
-                  },
-                  child: Image.asset(
-                    Assets.iconsIcClose,
-                    height: 20.0,
-                    color: context.iconColor,
-                  ),
-                ),
-              ],
-            ),
-            Divider(),
-            10.height,
-            Text(language.wouldYouLikeTo, textAlign: TextAlign.left, style: secondaryTextStyle(size: 14, color: appTextSecondaryColor, weight: FontWeight.w600)),
-            16.height,
-            Container(
-              padding: EdgeInsets.all(14),
-              decoration: boxDecorationWithRoundedCorners(borderRadius: BorderRadius.circular(8), backgroundColor: appStore.isDarkMode ? context.dividerColor : dashboard3CardColor),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+        return Form(
+          key: _formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Header
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  serviceDetailsWidget("${language.serviceName}:", widget.data.serviceDetail?.name.validate() ?? "", false).visible(widget.selectedPackage == null),
-                  serviceDetailsWidget("${language.packageName}:", widget.selectedPackage?.name.validate() ?? "", false).visible(widget.selectedPackage != null),
-                  serviceDetailsWidget("${language.lblDateAndTime}",widget.data.serviceDetail!.isSlotAvailable?getConfirmBookingDateFormat(date: "${widget.data.serviceDetail!.bookingDate} ${widget.data.serviceDetail!.bookingSlot}"): getConfirmBookingDateFormat(date: widget.data.serviceDetail!.dateTimeVal.validate()), false),
-                  serviceDetailsWidget("${language.price}:",widget.data.serviceDetail!.isFreeService? "Free" :  widget.bookingPrice.validate().toStringAsFixed(getIntAsync(PRICE_DECIMAL_POINTS)), !widget.data.serviceDetail!.isFreeService)
+                  Text(language.lblConfirmBooking, style: boldTextStyle(size: 16)),
+                  GestureDetector(
+                    onTap: () {
+                      finish(context);
+                    },
+                    child: Image.asset(
+                      Assets.iconsIcClose,
+                      height: 20.0,
+                      color: context.iconColor,
+                    ),
+                  ),
                 ],
               ),
-            ),
-            16.height,
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(14),
-              decoration: boxDecorationWithRoundedCorners(
-                borderRadius: BorderRadius.circular(8),
-                backgroundColor: cancellationsBgColor,
+              Divider(),
+              10.height,
+              Text(language.wouldYouLikeTo, textAlign: TextAlign.left, style: secondaryTextStyle(size: 14, color: appTextSecondaryColor, weight: FontWeight.w600)),
+              16.height,
+              // Service details card - white fill
+              Container(
+                padding: EdgeInsets.all(14),
+                decoration: boxDecorationWithRoundedCorners(
+                  borderRadius: BorderRadius.circular(12),
+                  backgroundColor: Colors.white,
+                  border: Border.all(color: primaryColor.withOpacity(0.1)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    serviceDetailsWidget("${language.serviceName}:", widget.data.serviceDetail?.name.validate() ?? "", false).visible(widget.selectedPackage == null),
+                    serviceDetailsWidget("${language.packageName}:", widget.selectedPackage?.name.validate() ?? "", false).visible(widget.selectedPackage != null),
+                    serviceDetailsWidget("${language.lblDateAndTime}", widget.data.serviceDetail!.isSlotAvailable ? getConfirmBookingDateFormat(date: "${widget.data.serviceDetail!.bookingDate} ${widget.data.serviceDetail!.bookingSlot}") : getConfirmBookingDateFormat(date: widget.data.serviceDetail!.dateTimeVal.validate()), false),
+                    serviceDetailsWidget("${language.price}:", widget.data.serviceDetail!.isFreeService ? "Free" : widget.bookingPrice.validate().toStringAsFixed(getIntAsync(PRICE_DECIMAL_POINTS)), !widget.data.serviceDetail!.isFreeService),
+                  ],
+                ),
               ),
-              child: Text(
-                '* ${language.a} ${appConfigurationStore.cancellationChargeAmount}% ${language.feeAppliesForCancellations} ${appConfigurationStore.cancellationChargeHours} ${language.hoursOfTheScheduled}',
-                style: secondaryTextStyle(size: 10, color: redColor, fontStyle: FontStyle.italic, weight: FontWeight.w600),
-              ),
-            ).visible(!widget.data.serviceDetail!.isFreeService && appConfigurationStore.cancellationCharge),
-            16.height,
-            ExcludeSemantics(
-              child: CheckboxListTile(
-                checkboxShape: RoundedRectangleBorder(borderRadius: radius(4)),
-                autofocus: false,
-                activeColor: context.primaryColor,
-                checkColor: appStore.isDarkMode ? context.iconColor : context.cardColor,
-                value: isSelected,
-                onChanged: (val) async {
-                  isSelected = !isSelected;
-                  setState(() {});
-                },
-                title: RichTextWidget(
-                  list: [
-                    TextSpan(text: '${language.byConfirmingYouAgree} ', style: secondaryTextStyle(size: 14, fontFamily: fontFamilySecondaryGlobal)),
-                    TextSpan(
-                      text: language.lblTermsOfService,
-                      style: boldTextStyle(color: primaryColor, size: 14),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          checkIfLink(context, appConfigurationStore.termConditions, title: language.termsCondition);
-                        },
-                    ),
-                    TextSpan(text: ' ${language.and} ', style: secondaryTextStyle()),
-                    TextSpan(
-                      text: language.privacyPolicy,
-                      style: boldTextStyle(color: primaryColor, size: 14),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          checkIfLink(context, appConfigurationStore.privacyPolicy, title: language.privacyPolicy);
-                        },
+              16.height,
+              // Phone number field - mandatory
+              Container(
+                padding: EdgeInsets.all(14),
+                decoration: boxDecorationWithRoundedCorners(
+                  borderRadius: BorderRadius.circular(12),
+                  backgroundColor: Colors.white,
+                  border: Border.all(color: primaryColor.withOpacity(0.1)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Mobile Number *', style: boldTextStyle(size: 12, color: primaryColor)),
+                    8.height,
+                    TextFormField(
+                      controller: phoneController,
+                      keyboardType: TextInputType.phone,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(10),
+                      ],
+                      decoration: InputDecoration(
+                        hintText: 'Enter your mobile number',
+                        hintStyle: secondaryTextStyle(size: 12),
+                        prefixIcon: Icon(Icons.phone_android, color: primaryColor, size: 20),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: primaryColor.withOpacity(0.3)),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: primaryColor.withOpacity(0.3)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: primaryColor),
+                        ),
+                        filled: true,
+                        fillColor: context.cardColor,
+                      ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Mobile number is required';
+                        }
+                        if (value.trim().length < 10) {
+                          return 'Enter a valid 10-digit mobile number';
+                        }
+                        return null;
+                      },
                     ),
                   ],
                 ),
-                controlAffinity: ListTileControlAffinity.leading,
-                contentPadding: EdgeInsets.zero,
               ),
-            ),
-            32.height,
-            AppButton(
-              width: context.width(),
-              text: language.confirm,
-              textColor: isSelected ? Colors.white : darkGray,
-              color: isSelected ? context.primaryColor : context.dividerColor,
-              onTap: () {
-                if (isSelected) {
-                  bookServices();
-                } else {
-                  toast(language.termsConditionsAccept);
-                }
-              },
-            ),
-            TextButton(
-                onPressed: () {
-                  finish(context);
+              12.height,
+              // Cancellation notice
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(14),
+                decoration: boxDecorationWithRoundedCorners(
+                  borderRadius: BorderRadius.circular(8),
+                  backgroundColor: cancellationsBgColor,
+                ),
+                child: Text(
+                  '* ${language.a} ${appConfigurationStore.cancellationChargeAmount}% ${language.feeAppliesForCancellations} ${appConfigurationStore.cancellationChargeHours} ${language.hoursOfTheScheduled}',
+                  style: secondaryTextStyle(size: 10, color: redColor, fontStyle: FontStyle.italic, weight: FontWeight.w600),
+                ),
+              ).visible(!widget.data.serviceDetail!.isFreeService && appConfigurationStore.cancellationCharge),
+              12.height,
+              // Terms checkbox
+              ExcludeSemantics(
+                child: CheckboxListTile(
+                  checkboxShape: RoundedRectangleBorder(borderRadius: radius(4)),
+                  autofocus: false,
+                  activeColor: context.primaryColor,
+                  checkColor: appStore.isDarkMode ? context.iconColor : context.cardColor,
+                  value: isSelected,
+                  onChanged: (val) async {
+                    isSelected = !isSelected;
+                    setState(() {});
+                  },
+                  title: RichTextWidget(
+                    list: [
+                      TextSpan(text: '${language.byConfirmingYouAgree} ', style: secondaryTextStyle(size: 14, fontFamily: fontFamilySecondaryGlobal)),
+                      TextSpan(
+                        text: language.lblTermsOfService,
+                        style: boldTextStyle(color: primaryColor, size: 14),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            checkIfLink(context, appConfigurationStore.termConditions, title: language.termsCondition);
+                          },
+                      ),
+                      TextSpan(text: ' ${language.and} ', style: secondaryTextStyle()),
+                      TextSpan(
+                        text: language.privacyPolicy,
+                        style: boldTextStyle(color: primaryColor, size: 14),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            checkIfLink(context, appConfigurationStore.privacyPolicy, title: language.privacyPolicy);
+                          },
+                      ),
+                    ],
+                  ),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  contentPadding: EdgeInsets.zero,
+                ),
+              ),
+              24.height,
+              // Confirm button
+              AppButton(
+                width: context.width(),
+                text: language.confirm,
+                textColor: isSelected ? Colors.white : darkGray,
+                color: isSelected ? context.primaryColor : context.dividerColor,
+                shapeBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                onTap: () {
+                  if (isSelected) {
+                    bookServices();
+                  } else {
+                    toast(language.termsConditionsAccept);
+                  }
                 },
-                child: Text(language.lblCancel, style: boldTextStyle(size: 14, color: primaryColor, decoration: TextDecoration.underline, decorationColor: primaryColor)))
-          ],
-        ).visible(
-          !appStore.isLoading,
-          defaultWidget: LoaderWidget().withSize(width: 250, height: 280),
+              ),
+              TextButton(
+                  onPressed: () {
+                    finish(context);
+                  },
+                  child: Text(language.lblCancel, style: boldTextStyle(size: 14, color: primaryColor, decoration: TextDecoration.underline, decorationColor: primaryColor)))
+            ],
+          ).visible(
+            !appStore.isLoading,
+            defaultWidget: LoaderWidget().withSize(width: 250, height: 280),
+          ),
         );
       },
     );

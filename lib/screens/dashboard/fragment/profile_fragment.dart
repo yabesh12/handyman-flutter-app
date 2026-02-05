@@ -327,64 +327,20 @@ class ProfileFragmentState extends State<ProfileFragment> {
                       ).visible(!appStore.isLoggedIn),
                     ],
                   ).paddingSymmetric(horizontal: 16),
-                  SettingSection(
-                    title: Text(language.lblDangerZone.toUpperCase(), style: boldTextStyle(color: redColor, size: 14)),
-                    headingDecoration: BoxDecoration(color: redColor.withOpacity(0.08), borderRadius: BorderRadiusDirectional.vertical(top: Radius.circular(16))),
-                    divider: Offstage(),
-                    headerPadding: EdgeInsets.only(bottom: 14, right: 14, left: 16, top: 14),
-                    items: [
-                      8.height,
-                      SettingItemWidget(
-                        decoration: BoxDecoration(color: context.cardColor, borderRadius: BorderRadiusDirectional.vertical(bottom: Radius.circular(16))),
-                        leading: ic_delete_account.iconImage(size: SETTING_ICON_SIZE),
-                        paddingBeforeTrailing: 4,
-                        title: language.lblDeleteAccount,
-                        titleTextStyle: boldTextStyle(size: 12),
-                        highlightColor: Colors.transparent,
-                        splashColor: Colors.transparent,
+                  if (appStore.isLoggedIn)
+                    Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.only(left: 16, right: 16, top: 24),
+                      child: AppButton(
+                        text: language.logout,
+                        textStyle: boldTextStyle(color: Colors.white, size: 14),
+                        color: primaryColor,
+                        shapeBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         onTap: () {
-                          showConfirmDialogCustom(
-                            context,
-                            negativeText: language.lblCancel,
-                            positiveText: language.lblDelete,
-                            onAccept: (_) {
-                              ifNotTester(() {
-                                appStore.setLoading(true);
-
-                                deleteAccountCompletely().then((value) async {
-                                  try {
-                                    await userService.removeDocument(appStore.uid);
-                                    await userService.deleteUser();
-                                  } catch (e) {
-                                    print(e);
-                                  }
-
-                                  appStore.setLoading(false);
-
-                                  await clearPreferences();
-                                  toast(value.message);
-
-                                  push(DashboardScreen(), isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
-                                }).catchError((e) {
-                                  appStore.setLoading(false);
-                                  toast(e.toString());
-                                });
-                              });
-                            },
-                            dialogType: DialogType.DELETE,
-                            title: language.lblDeleteAccountConformation,
-                          );
-                        },
-                      ),
-                      64.height,
-                      TextButton(
-                        child: Text(language.logout, style: boldTextStyle(color: primaryColor, size: 16)),
-                        onPressed: () {
                           logout(context);
                         },
-                      ).center(),
-                    ],
-                  ).visible(appStore.isLoggedIn).paddingOnly(left: 16, right: 16, top: 16),
+                      ),
+                    ),
                   30.height.visible(!appStore.isLoggedIn),
                   SnapHelperWidget<PackageInfoData>(
                     future: getPackageInfo(),

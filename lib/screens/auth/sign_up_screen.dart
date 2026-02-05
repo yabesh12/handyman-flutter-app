@@ -67,7 +67,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       mobileCont.text = widget.phoneNumber != null ? widget.phoneNumber.toString() : "";
       passwordCont.text = widget.phoneNumber != null ? widget.phoneNumber.toString() : "";
-      userNameCont.text = widget.phoneNumber != null ? widget.phoneNumber.toString() : "";
     }
   }
 
@@ -95,13 +94,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
         formKey.currentState!.save();
         appStore.setLoading(true);
 
+        // AC Chill - Split full name into first and last name for OTP registration
+        String fullName = fullNameCont.text.trim();
+        String firstName = fullName.split(' ').first;
+        String lastName = fullName.split(' ').length > 1
+            ? fullName.split(' ').skip(1).join(' ')
+            : '';
+
         UserData userResponse = UserData()
           ..username = widget.phoneNumber.validate().trim()
           ..loginType = LOGIN_TYPE_OTP
           ..contactNumber = buildMobileNumber()
           ..email = emailCont.text.trim()
-          ..firstName = fNameCont.text.trim()
-          ..lastName = lNameCont.text.trim()
+          ..firstName = firstName
+          ..lastName = lastName
           ..userType = USER_TYPE_USER
           ..uid = widget.uid.validate()
           ..password = widget.phoneNumber.validate().trim();

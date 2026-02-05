@@ -17,7 +17,7 @@ import 'package:booking_system_flutter/screens/blog/model/blog_response_model.da
 import 'package:booking_system_flutter/screens/helpDesk/model/help_desk_response.dart';
 import 'package:booking_system_flutter/screens/splash_screen.dart';
 import 'package:booking_system_flutter/services/auth_services.dart';
-import 'package:booking_system_flutter/services/chat_services.dart';
+// AC Chill - Chat module removed
 import 'package:booking_system_flutter/services/user_services.dart';
 import 'package:booking_system_flutter/store/app_configuration_store.dart';
 import 'package:booking_system_flutter/store/app_store.dart';
@@ -63,8 +63,7 @@ BaseLanguage language = LanguageEn();
 //region Services
 UserService userService = UserService();
 AuthService authService = AuthService();
-// AC Chill - Chat services removed
-// ChatServices chatServices = ChatServices();
+// AC Chill - Chat module removed
 RemoteConfigDataModel remoteConfigDataModel = RemoteConfigDataModel();
 //endregion
 

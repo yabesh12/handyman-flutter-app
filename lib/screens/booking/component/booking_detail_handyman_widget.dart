@@ -5,7 +5,7 @@ import 'package:booking_system_flutter/model/booking_data_model.dart';
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
-import 'package:booking_system_flutter/screens/chat/user_chat_screen.dart';
+// AC Chill - Chat module removed
 import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/common.dart';
 import 'package:booking_system_flutter/utils/images.dart';
@@ -29,8 +29,6 @@ class BookingDetailHandymanWidget extends StatefulWidget {
 
 class BookingDetailHandymanWidgetState extends State<BookingDetailHandymanWidget> {
   int? flag;
-
-  bool isChattingAllow = false;
 
   @override
   void initState() {
@@ -126,32 +124,7 @@ class BookingDetailHandymanWidgetState extends State<BookingDetailHandymanWidget
                     launchCall(widget.handymanData.contactNumber.validate());
                   },
                 ).paddingRight(16).expand(),
-              AppButton(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ic_chat.iconImage(size: 18),
-                    8.width,
-                    Text(language.lblChat, style: boldTextStyle()),
-                  ],
-                ).fit(),
-                width: context.width(),
-                elevation: 0,
-                color: context.scaffoldBackgroundColor,
-                onTap: () async {
-                  toast(language.pleaseWaitWhileWeLoadChatDetails);
-                  UserData? user = await userService.getUserNull(email: widget.handymanData.email.validate());
-                  if (user != null) {
-                    Fluttertoast.cancel();
-                    isChattingAllow = widget.bookingDetail.status == BookingStatusKeys.complete || widget.bookingDetail.status == BookingStatusKeys.cancelled;
-                    UserChatScreen(receiverUser: user, isChattingAllow: isChattingAllow).launch(context);
-                  } else {
-                    Fluttertoast.cancel();
-                    toast("${widget.handymanData.firstName} ${language.isNotAvailableForChat}");
-                  }
-                },
-              ).expand(),
-              16.width,
+              // AC Chill - Chat button removed
             ],
           ),
           8.height,

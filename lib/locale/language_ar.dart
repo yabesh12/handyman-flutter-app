@@ -2063,4 +2063,50 @@ class LanguageAr extends BaseLanguage {
 
   @override
   String get chooseYourDateRange => 'اختر النطاق الزمني الخاص بك';
+
+  // AC Chill - OTP Translations
+  @override
+  String get verifyResetOTP => 'التحقق من رمز OTP لإعادة تعيين كلمة المرور';
+
+  @override
+  String get enterOTPSentTo => 'أدخل رمز OTP المرسل إلى';
+
+  @override
+  String get verify => 'تحقق';
+
+  @override
+  String get didNotReceiveOTP => 'لم تستلم رمز OTP؟';
+
+  @override
+  String get resendOTP => 'إعادة إرسال OTP';
+
+  @override
+  String get resendIn => 'إعادة الإرسال في';
+
+  @override
+  String get otpVerifiedSuccessfully => 'تم التحقق من OTP بنجاح';
+
+  @override
+  String get emailVerifiedSuccessfully => 'تم التحقق من البريد الإلكتروني بنجاح';
+
+  @override
+  String get otpSentSuccessfully => 'تم إرسال OTP بنجاح';
+
+  @override
+  String get enterNewPassword => 'أدخل كلمة المرور الجديدة';
+
+  @override
+  String get newPassword => 'كلمة المرور الجديدة';
+
+  @override
+  String get confirmNewPassword => 'تأكيد كلمة المرور الجديدة';
+
+  @override
+  String get passwordsDoNotMatch => 'كلمات المرور غير متطابقة';
+
+  @override
+  String get passwordResetSuccessfully => 'تم إعادة تعيين كلمة المرور بنجاح';
+
+  @override
+  String get fullName => 'الاسم الكامل';
 }

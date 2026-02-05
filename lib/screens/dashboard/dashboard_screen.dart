@@ -24,7 +24,9 @@ import '../newDashboard/dashboard_2/dashboard_fragment_2.dart';
 import '../newDashboard/dashboard_3/dashboard_fragment_3.dart';
 import '../newDashboard/dashboard_4/dashboard_fragment_4.dart';
 
-// AC Chill - Category and Chat screens removed from navigation
+import '../category/category_screen.dart';
+
+// AC Chill - Chat removed, Services tab added
 
 class DashboardScreen extends StatefulWidget {
   final bool? redirectToBooking;
@@ -140,7 +142,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         body: AnimatedOpacity(
           opacity: 1,
           duration: Duration(milliseconds: 500),
-          // AC Chill - Simplified navigation: Home, Bookings, Profile (3 tabs)
+          // AC Chill - Navigation: Home, Bookings, Services, Profile (4 tabs)
           child: [
             Observer(
               builder: (context) {
@@ -158,6 +160,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               }
             ),
             Observer(builder: (context) => appStore.isLoggedIn ? BookingFragment() : SignInScreen(isFromDashboard: true)),
+            CategoryScreen(),
             ProfileFragment(),
           ][currentIndex],
         ),
@@ -172,7 +175,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               surfaceTintColor: Colors.transparent,
               shadowColor: Colors.transparent,
             ),
-            // AC Chill - 3 tabs only: Home, Bookings, Profile
+            // AC Chill - 4 tabs: Home, Bookings, Services, Profile
             child: NavigationBar(
               selectedIndex: currentIndex,
               destinations: [
@@ -185,6 +188,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   icon: ic_ticket.iconImage(color: appTextSecondaryColor),
                   selectedIcon: ic_ticket.iconImage(color: context.primaryColor),
                   label: language.booking,
+                ),
+                NavigationDestination(
+                  icon: ic_category.iconImage(color: appTextSecondaryColor),
+                  selectedIcon: ic_category.iconImage(color: context.primaryColor),
+                  label: language.lblService,
                 ),
                 Observer(builder: (context) {
                   return NavigationDestination(

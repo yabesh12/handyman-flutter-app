@@ -2063,4 +2063,50 @@ class LanguageHi extends BaseLanguage {
 
   @override
   String get chooseYourDateRange => 'अपनी दिनांक सीमा चुनें';
+
+  // AC Chill - OTP Translations
+  @override
+  String get verifyResetOTP => 'पासवर्ड रीसेट OTP सत्यापित करें';
+
+  @override
+  String get enterOTPSentTo => 'भेजा गया OTP दर्ज करें';
+
+  @override
+  String get verify => 'सत्यापित करें';
+
+  @override
+  String get didNotReceiveOTP => 'OTP प्राप्त नहीं हुआ?';
+
+  @override
+  String get resendOTP => 'OTP पुनः भेजें';
+
+  @override
+  String get resendIn => 'में पुनः भेजें';
+
+  @override
+  String get otpVerifiedSuccessfully => 'OTP सफलतापूर्वक सत्यापित';
+
+  @override
+  String get emailVerifiedSuccessfully => 'ईमेल सफलतापूर्वक सत्यापित';
+
+  @override
+  String get otpSentSuccessfully => 'OTP सफलतापूर्वक भेजा गया';
+
+  @override
+  String get enterNewPassword => 'नया पासवर्ड दर्ज करें';
+
+  @override
+  String get newPassword => 'नया पासवर्ड';
+
+  @override
+  String get confirmNewPassword => 'नए पासवर्ड की पुष्टि करें';
+
+  @override
+  String get passwordsDoNotMatch => 'पासवर्ड मेल नहीं खाते';
+
+  @override
+  String get passwordResetSuccessfully => 'पासवर्ड सफलतापूर्वक रीसेट हो गया';
+
+  @override
+  String get fullName => 'पूरा नाम';
 }

@@ -2063,4 +2063,50 @@ class LanguageFr extends BaseLanguage {
 
   @override
   String get chooseYourDateRange => 'Choisissez votre plage de dates';
+
+  // AC Chill - OTP Translations
+  @override
+  String get verifyResetOTP => 'Vérifier le code OTP de réinitialisation';
+
+  @override
+  String get enterOTPSentTo => 'Entrez le code OTP envoyé à';
+
+  @override
+  String get verify => 'Vérifier';
+
+  @override
+  String get didNotReceiveOTP => "Vous n'avez pas reçu le code OTP?";
+
+  @override
+  String get resendOTP => 'Renvoyer le code OTP';
+
+  @override
+  String get resendIn => 'Renvoyer dans';
+
+  @override
+  String get otpVerifiedSuccessfully => 'OTP vérifié avec succès';
+
+  @override
+  String get emailVerifiedSuccessfully => 'Email vérifié avec succès';
+
+  @override
+  String get otpSentSuccessfully => 'OTP envoyé avec succès';
+
+  @override
+  String get enterNewPassword => 'Entrez le nouveau mot de passe';
+
+  @override
+  String get newPassword => 'Nouveau mot de passe';
+
+  @override
+  String get confirmNewPassword => 'Confirmer le nouveau mot de passe';
+
+  @override
+  String get passwordsDoNotMatch => 'Les mots de passe ne correspondent pas';
+
+  @override
+  String get passwordResetSuccessfully => 'Mot de passe réinitialisé avec succès';
+
+  @override
+  String get fullName => 'Nom complet';
 }

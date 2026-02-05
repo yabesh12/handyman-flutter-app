@@ -12,7 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../model/booking_data_model.dart';
 import '../../../utils/model_keys.dart';
-import '../../chat/user_chat_screen.dart';
+// AC Chill - Chat module removed
 
 class BookingDetailProviderWidget extends StatefulWidget {
   final UserData providerData;
@@ -28,8 +28,6 @@ class BookingDetailProviderWidget extends StatefulWidget {
 
 class BookingDetailProviderWidgetState extends State<BookingDetailProviderWidget> {
   UserData userData = UserData();
-
-  bool isChattingAllow = false;
 
   int? flag;
 
@@ -201,34 +199,7 @@ class BookingDetailProviderWidgetState extends State<BookingDetailProviderWidget
                       launchCall(widget.providerData.contactNumber.validate());
                     },
                   ).expand(),
-                16.width,
-                AppButton(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ic_chat.iconImage(size: 18),
-                      8.width,
-                      Text(language.lblChat, style: boldTextStyle()),
-                    ],
-                  ).fit(),
-                  width: context.width(),
-                  elevation: 0,
-                  color: context.scaffoldBackgroundColor,
-                  onTap: () async {
-                    toast(language.pleaseWaitWhileWeLoadChatDetails);
-                    UserData? user = await userService.getUserNull(email: widget.providerData.email.validate());
-                    if (user != null) {
-                      Fluttertoast.cancel();
-                      if (widget.bookingDetail != null) {
-                        isChattingAllow = widget.bookingDetail!.status == BookingStatusKeys.complete || widget.bookingDetail!.status == BookingStatusKeys.cancelled;
-                      }
-                      UserChatScreen(receiverUser: user, isChattingAllow: isChattingAllow).launch(context);
-                    } else {
-                      Fluttertoast.cancel();
-                      toast("${widget.providerData.firstName} ${language.isNotAvailableForChat}");
-                    }
-                  },
-                ).expand(),
+                // AC Chill - Chat button removed
               ],
             ).paddingTop(8),
         ],

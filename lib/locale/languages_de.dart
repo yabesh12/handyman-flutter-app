@@ -2062,4 +2062,50 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get chooseYourDateRange => 'Wählen Sie Ihren Datumsbereich';
+
+  // AC Chill - OTP Translations
+  @override
+  String get verifyResetOTP => 'Passwort-Reset OTP verifizieren';
+
+  @override
+  String get enterOTPSentTo => 'Geben Sie den OTP-Code ein, der gesendet wurde an';
+
+  @override
+  String get verify => 'Verifizieren';
+
+  @override
+  String get didNotReceiveOTP => 'OTP nicht erhalten?';
+
+  @override
+  String get resendOTP => 'OTP erneut senden';
+
+  @override
+  String get resendIn => 'Erneut senden in';
+
+  @override
+  String get otpVerifiedSuccessfully => 'OTP erfolgreich verifiziert';
+
+  @override
+  String get emailVerifiedSuccessfully => 'E-Mail erfolgreich verifiziert';
+
+  @override
+  String get otpSentSuccessfully => 'OTP erfolgreich gesendet';
+
+  @override
+  String get enterNewPassword => 'Neues Passwort eingeben';
+
+  @override
+  String get newPassword => 'Neues Passwort';
+
+  @override
+  String get confirmNewPassword => 'Neues Passwort bestätigen';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwörter stimmen nicht überein';
+
+  @override
+  String get passwordResetSuccessfully => 'Passwort erfolgreich zurückgesetzt';
+
+  @override
+  String get fullName => 'Vollständiger Name';
 }
